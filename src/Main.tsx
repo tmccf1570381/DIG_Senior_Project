@@ -9,7 +9,7 @@ export default function Main(){
         <>
         <Header />
         <main>
-            {true
+            {false
             ? <SkillMap />
             : <List />
             }

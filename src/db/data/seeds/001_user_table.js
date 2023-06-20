@@ -3,11 +3,11 @@
  * @returns { Promise<void> } 
  */
 exports.seed = async function(knex) {
-  await knex('skill').del();
-  await knex('profiles').del()
-  await knex('review').del();
-  await knex('record').del();
-  await knex('good').del();
+  // await knex('good').del();
+  // await knex('skill').del();
+  // await knex('profiles').del()
+  // await knex('review').del();
+  // await knex('record').del();
   await knex('posted').del();
   await knex('user').del();
   await knex('user').insert([
