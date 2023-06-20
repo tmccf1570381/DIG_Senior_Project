@@ -8,3 +8,8 @@ files:
 #   ApplicationStart:
 #     - location: start.sh
 #       timeout: 180
+hooks:
+  BeforeInstall:
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
