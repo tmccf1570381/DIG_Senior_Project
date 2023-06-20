@@ -7,8 +7,8 @@ const app = express();
 const PORT = 3456;
 
 app.listen(PORT, () => {
+  console.log(process.env.DB_HOST);
   console.log(process.env.DB_DATABASE);
-  console.log(process.env.PASSWORD);
   console.log(process.env.NODE_ENV);
   console.log(`Server is running ${PORT} !`);
 });
