@@ -1,0 +1,176 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.left{
+    display: flex;
+    flex-flow:column;
+    align-items: center;
+    width: 25%;
+}
+
+.right{
+    width: 72%;
+    display: flex;
+    flex-flow:column;
+    padding: 3vh 1% 0 1%;
+}
+
+.left>figure{
+    height: 40vh;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow:column;
+}
+
+.left>figure>img{
+    height: 25vh;
+    width:25vh;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 2vh;
+}
+
+.left>figure>h2{
+    margin-bottom: 0;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.left>figure>h2:hover{
+    text-decoration: none;
+}
+
+.left>div{
+    margin-top: 2vh;
+    width: 90%;
+    /* height: ; */
+}
+
+.right>article>h2{
+    margin: 0;
+    padding: 1vh 0 0.7vh 3vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.right>article>h2::before{
+    position: absolute;
+    content: '';
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: none;
+    border-left: solid 30px transparent;
+    border-bottom: solid 30px #98DDCA;
+}
+
+.right>article>h2::after {
+    position: absolute;
+    content: '';
+    bottom: -3px;
+    left: 10px;
+    width: 100%;
+    border-bottom: solid 4px #98DDCA;
+  }
+
+.right article>div{
+    height: 31vh;
+    padding: 0.8rem;
+    display: flex;
+    overflow-y: scroll;
+}
+
+.right article>div::-webkit-scrollbar{
+    display:none;
+}
+
+.skillEdit{
+    margin-left: 1.5vw;
+    height: 2.5vh;
+    border-bottom: 1px black solid;
+    cursor: pointer;
+}
+
+.skillTable{
+    width: 95%;
+    display: flex;
+    flex-flow: column;
+    font-size: 110%;
+}
+
+.skillhead{
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.skillhead>span{
+    background-color: #FFD3B4;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.skillTable>div{
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.skillTable>div>span{
+    padding: 0.6vh 1vw;
+    margin: 0 1vw 0 0;
+    display: inline-block;
+    width: 18%;
+}
+
+.skillTable>div>span:first-child{
+    margin-left: 0.3vw;
+    width: 48%;
+}
+
+.right>article>.griduser{
+    width: auto;
+    overflow-x:scroll;
+}
+
+.griduser>div{
+    width: 40vw;
+    height: 10vh;
+
+}
+
+.left>figure+tr{
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    width: 90%;
+    font-size: 90%;
+}
+
+.left>figure+tr>th,.left>figure+tr>td{
+    width: 25%;
+    height: 4.2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid gray;
+}
+
+.left>figure+tr>td:last-child{
+    border: none;
+}
+
+.left>figure+tr>th{
+    background-color: #FFD3B4;
+}
