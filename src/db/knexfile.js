@@ -15,14 +15,13 @@ module.exports = {
   },
   production: {
     client: "pg",
-    // connection: {
-    //   host: process.env.DB_HOST,
-    //   database:process.env.DB_DATABASE,
-    //   user: process.env.DB_USERNAME,
-    //   port:5432,
-    //   password:process.env.DB_PASSWORD,
-    // },
-    connection: process.env.DB_HOST,
+    connection: {
+      host: process.env.DB_HOST,
+      database:process.env.DB_DATABASE,
+      user: process.env.DB_USERNAME,
+      port:5432,
+      password:process.env.DB_PASSWORD,
+    },
     acquireConnectionTimeout: 1000000,
     pool: {
     min: 0,
