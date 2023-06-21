@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,"./build")));
 
 app.get("/test", async (req,res)=>{
-  res.status(200).send("test");
+  res.status(200).send({res:"test"});
 })
 
 app.get("/user-list/:id", async (req, res)=>{
