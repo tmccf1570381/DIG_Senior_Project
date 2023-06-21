@@ -22,9 +22,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,"./build")));
 
-app.get("/test", async (req,res)=>{
-  res.status(200).send({res:"test"});
-})
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 
 app.get("/user-list/:id", async (req, res)=>{
     const data = await knex.from("users")
