@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,"./build")));
+// app.use(express.static(path.join(__dirname,"./build")));
 
 app.get('/', (req, res) => {
   res.send('Hello');
