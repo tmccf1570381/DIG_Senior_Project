@@ -6,10 +6,14 @@ const knex = require("./src/db/index");
 const app = express();
 const PORT = 3456;
 
-app.listen(PORT, () => {
+app.listen(PORT,async () => {
   console.log(process.env.DB_HOST);
   console.log(process.env.DB_DATABASE);
   console.log(process.env.NODE_ENV);
+  const userData = await knex.from("users");
+  console.log(userData);
+
+
   console.log(`Server is running ${PORT} !`);
 });
 
