@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import "./EditSkill.css"
 import { VariableContext } from "../../App";
-const fetchURL = process.env.NODE_ENV === "production" ? "http://10.0.138.130:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
 type props ={
     setEditFlag:React.Dispatch<React.SetStateAction<number>>,

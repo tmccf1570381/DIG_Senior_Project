@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const bodyParser = require('body-parser');
-const path = require("path");
+// const path = require("path");
 const knex = require("./src/db/index");
 const app = express();
 const PORT = 3456;
@@ -22,14 +22,13 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname,"./build")));
 
-app.get('/', (req, res) => {
-  res.send('Hello');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello');
+// });
 
 app.get('/test', (req, res) => {
   res.send('testでーーーす');
 });
-
 
 app.get("/user-list/:id", async (req, res)=>{
     const data = await knex.from("users")
@@ -53,10 +52,6 @@ app.post("/new-skill", async (req,res)=>{
   .map(e=>({skill:e.skill,date:e.date}))}))
   res.status(200).send(response[0]);
 })
-
-app.put("/",(req, res)=>{
-    res.status(200).send("ok:put");
-});
 
 app.delete("/skill",async (req, res)=>{
   await knex("skill")

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faSort, faSliders, faSquarePlus, faSearch} from "@fortawesome/free-solid-svg-icons";
+import { faStar, faSort, faSliders, faSquarePlus} from "@fortawesome/free-solid-svg-icons";
 import { VariableContext } from "../../App";
 
 type props = {
