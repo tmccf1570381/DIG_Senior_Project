@@ -4,13 +4,12 @@ import { VariableContext } from "../App";
 import SignUp from "./Login/SignUp.tsx";
 const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
-
-const hash = async (password:string) => {
-  const encoder = new TextEncoder().encode(password);
-  const hash = await crypto.subtle.digest('SHA-256', encoder);
-  const hashArray = Array.from(new Uint8Array(hash))
-  return (hashArray.map(b => b.toString(16).padStart(2, '0')).join(''));
-}
+// const hash = async (password:string) => {
+//   const encoder = new TextEncoder().encode(password);
+//   const hash = await crypto.subtle.digest('SHA-256', encoder);
+//   const hashArray = Array.from(new Uint8Array(hash))
+//   return (hashArray.map(b => b.toString(16).padStart(2, '0')).join(''));
+// }
 
 export default function Login(){
     const [, , , , , , setUserData] = useContext(VariableContext);
@@ -19,9 +18,9 @@ export default function Login(){
 
     const signIn = () => {
       (async () => {
-        const hashPass = await hash(formValues.password);
+        // const hashPass = await hash(formValues.password);
         let fetchData = await fetch(fetchURL+"/user", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...formValues, password:hashPass})})
+          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...formValues, password:formValues.password})})
           .then((e) => e.json()).catch((error) => {return false});
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         fetchData ? setUserData(fetchData) : alert("Sigin in failed... please confirm your id and password");
