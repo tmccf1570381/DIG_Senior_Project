@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: "pg",
     connection: {
-      database: "sp",
+      database: "dig_zamas_db",
       user: "user",
     },
     migrations: {

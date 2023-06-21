@@ -9,7 +9,7 @@ exports.up = async function(knex) {
         table.string("team",64);
         table.string("position",32);
 
-        table.foreign("user-id").references("user.user-id");
+        table.foreign("user-id").references("users.user-id");
     });
 };
 

@@ -8,7 +8,7 @@ exports.up = async function(knex) {
         table.integer("r-user-id",32);
         table.integer("rr-id",32);
 
-        table.foreign("r-user-id").references("user.user-id");
+        table.foreign("r-user-id").references("users.user-id");
         table.foreign("rr-id").references("posted.id");
     })
 };

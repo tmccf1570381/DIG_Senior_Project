@@ -3,14 +3,14 @@
  * @returns { Promise<void> } 
  */
 exports.seed = async function(knex) {
-  // await knex('good').del();
-  // await knex('skill').del();
-  // await knex('profiles').del()
-  // await knex('review').del();
-  // await knex('record').del();
+  await knex('good').del();
+  await knex('skill').del();
+  await knex('profiles').del()
+  await knex('review').del();
+  await knex('record').del();
   await knex('posted').del();
-  await knex('user').del();
-  await knex('user').insert([
+  await knex('users').del();
+  await knex('users').insert([
     {"user-id": 10001, "first-name": '久場', "last-name":"智宏","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10002, "first-name": '宮城', "last-name":"恒太郎","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10003, "first-name": '菊地', "last-name":"慧","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},

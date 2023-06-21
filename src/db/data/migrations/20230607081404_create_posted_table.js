@@ -12,7 +12,7 @@ exports.up = async function(knex) {
         table.string("pict",1024);
         table.integer("user-id",32).notNullable();
 
-        table.foreign("user-id").references("user.user-id");
+        table.foreign("user-id").references("users.user-id");
     })
 };
 

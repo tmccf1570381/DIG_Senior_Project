@@ -10,7 +10,7 @@ exports.up = async function(knex) {
         table.string("comment",256);
         table.string("date",16);
 
-        table.foreign("user-id").references("user.user-id");
+        table.foreign("user-id").references("users.user-id");
     });
 };
 
