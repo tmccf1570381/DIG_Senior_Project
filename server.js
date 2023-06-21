@@ -27,10 +27,10 @@ app.get("/test", async (req,res)=>{
 })
 
 app.get("/user-list/:id", async (req, res)=>{
-    const data = await knex.from("user")
-    .leftJoin("profiles","user.user-id","profiles.user-id")
-    .where("user.user-id","=",req.params.id)
-    .select(["user.user-id","user.first-name","user.last-name","profiles.16person","profiles.team","profiles.position"])
+    const data = await knex.from("users")
+    .leftJoin("profiles","users.user-id","profiles.user-id")
+    .where("users.user-id","=",req.params.id)
+    .select(["users.user-id","users.first-name","users.last-name","profiles.16person","profiles.team","profiles.position"])
     const skill = await knex.from("skill");
     const response = data.map(e => ({...e, skill:skill.filter(data => data["user-id"]===e["user-id"])
     .map(e=>({skill:e.skill,date:e.date}))}));
@@ -39,10 +39,10 @@ app.get("/user-list/:id", async (req, res)=>{
 
 app.post("/new-skill", async (req,res)=>{
   await knex("skill").insert(req.body);
-  const data = await knex.from("user")
-  .leftJoin("profiles","user.user-id","profiles.user-id")
-  .where("user.user-id","=",req.body["user-id"])
-  .select(["user.user-id","user.first-name","user.last-name","profiles.16person","profiles.team","profiles.position"])
+  const data = await knex.from("users")
+  .leftJoin("profiles","users.user-id","profiles.user-id")
+  .where("users.user-id","=",req.body["user-id"])
+  .select(["users.user-id","users.first-name","users.last-name","profiles.16person","profiles.team","profiles.position"])
   const skill = await knex.from("skill");
   const response = data.map(e => ({...e, skill:skill.filter(data => data["user-id"]===e["user-id"])
   .map(e=>({skill:e.skill,date:e.date}))}))
@@ -59,10 +59,10 @@ app.delete("/skill",async (req, res)=>{
   .where("skill.skill","=",req.body.skill)
   .delete(["user-id","skill","comment","date","skill-id"]);
   await knex("skill").insert(req.body);
-  const data = await knex.from("user")
-  .leftJoin("profiles","user.user-id","profiles.user-id")
-  .where("user.user-id","=",req.body["user-id"])
-  .select(["user.user-id","user.first-name","user.last-name","profiles.16person","profiles.team","profiles.position"])
+  const data = await knex.from("users")
+  .leftJoin("profiles","users.user-id","profiles.user-id")
+  .where("users.user-id","=",req.body["user-id"])
+  .select(["users.user-id","users.first-name","users.last-name","profiles.16person","profiles.team","profiles.position"])
   const skill = await knex.from("skill");
   const response = data.map(e => ({...e, skill:skill.filter(data => data["user-id"]===e["user-id"])
   .map(e=>({skill:e.skill,date:e.date}))}))
@@ -72,8 +72,8 @@ app.delete("/skill",async (req, res)=>{
 app.get("/posted", async (req, res) => {
   const data = await knex.from("posted")
   .leftJoin("good", "posted.id", "good.g-id")
-  .leftJoin("user","posted.user-id", "user.user-id")
-  .select(["id","title","post-date","zamas","tag","url","pict","user.user-id","zamas","first-name","last-name"]).then((e) => e);
+  .leftJoin("users","posted.user-id", "users.user-id")
+  .select(["id","title","post-date","zamas","tag","url","pict","users.user-id","zamas","first-name","last-name"]).then((e) => e);
   const review = await knex.from("posted").rightJoin('review', 'posted.id', 'review.r-id')
   .select(["id","comment"]).then(e => e);
   const response = data.map(e=>({...e,review:review.filter(i=> i.id === e.id).map(e=>e.comment)}));
@@ -89,8 +89,8 @@ app.post("/posted", async (req, res) => {
   await knex("review").insert({comment: req.body.comment, "r-id": id,"rev-id": revid});
   const data = await knex.from("posted")
   .leftJoin("good", "posted.id", "good.g-id")
-  .leftJoin("user","posted.user-id", "user.user-id")
-  .select(["id","title","post-date","zamas","tag","url","pict","user.user-id","zamas","first-name","last-name"]).then((e) => e);
+  .leftJoin("users","posted.user-id", "users.user-id")
+  .select(["id","title","post-date","zamas","tag","url","pict","users.user-id","zamas","first-name","last-name"]).then((e) => e);
   const review = await knex.from("posted").rightJoin('review', 'posted.id', 'review.r-id')
   .select(["id","comment"]).then(e => e);
   const response = data.map(e=>({...e,review:review.filter(i=> i.id === e.id).map(e=>e.comment)}));
@@ -103,8 +103,8 @@ app.post("/good", async (req, res) => {
   await knex.from("good").where("g-id","=",req.body["g-id"]).update({'zamas':zamas[0].zamas+1}, ['g-id', 'zamas']);
   const data = await knex.from("posted")
   .leftJoin("good", "posted.id", "good.g-id")
-  .leftJoin("user","posted.user-id", "user.user-id")
-  .select(["id","title","post-date","zamas","tag","url","pict","user.user-id","zamas","first-name","last-name"]).then((e) => e);
+  .leftJoin("users","posted.user-id", "users.user-id")
+  .select(["id","title","post-date","zamas","tag","url","pict","users.user-id","zamas","first-name","last-name"]).then((e) => e);
   const review = await knex.from("posted").rightJoin('review', 'posted.id', 'review.r-id')
   .select(["id","comment"]).then(e => e);
   const response = data.map(e=>({...e,review:review.filter(i=> i.id === e.id).map(e=>e.comment)}));
@@ -115,7 +115,7 @@ app.post("/good", async (req, res) => {
 app.post("/user", async (req, res) => {
   const record = await knex.from("record").select("*")
   .then(e=> e.filter(e => e["r-user-id"] === Number(req.body["user-id"])).map(e=>e["rr-id"]));
-  const userData = await knex.from("user")
+  const userData = await knex.from("users")
     .where("user-id", "=", req.body["user-id"])
     .where("password", "=", req.body.password)
     .select(["user-id","first-name","last-name"]);
@@ -123,11 +123,11 @@ app.post("/user", async (req, res) => {
 });
 
 app.post("/singnup", async (req,res) =>{
-  const check = await knex.from("user").where("user-id", "=", req.body["user-id"]);
+  const check = await knex.from("users").where("user-id", "=", req.body["user-id"]);
   if(check.length > 0){
     res.status(200).send("1");
   }else{
-    await knex("user").insert(req.body);
+    await knex("users").insert(req.body);
     res.status(200).send("2");
   };
 })
