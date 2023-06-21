@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import "./List.css";
 import { VariableContext } from "../App";
 import Modal from "./Header/Modal.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "http://10.0.138.130:3456" : "http://localhost:3456";
+
 
 const List= () => {
   const [popup, , postedArray, setPostedArray] = useContext(VariableContext);

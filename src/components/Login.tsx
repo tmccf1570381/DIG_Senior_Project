@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import "./Login.css";
 import { VariableContext } from "../App";
 import SignUp from "./Login/SignUp.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "http://10.0.138.130:3456" : "http://localhost:3456";
+
 
 const hash = async (password:string) => {
   const encoder = new TextEncoder().encode(password);

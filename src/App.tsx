@@ -5,7 +5,7 @@ import Login from "./components/Login";
 const fetchURL = process.env.NODE_ENV === "production" ? "" : "http://localhost:3456";
 console.log(process.env.NODE_ENV);
 console.log(process.env.DATA_BASE);
-console.log(process.env.PASSWORD);
+console.log(fetchURL);
 
 type props={
   postedArray:
