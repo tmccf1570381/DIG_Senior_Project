@@ -2,14 +2,8 @@ import React, { useContext, useState } from "react";
 import "./Login.css";
 import { VariableContext } from "../App";
 import SignUp from "./Login/SignUp.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
-
-// const hash = async (password:string) => {
-//   const encoder = new TextEncoder().encode(password);
-//   const hash = await crypto.subtle.digest('SHA-256', encoder);
-//   const hashArray = Array.from(new Uint8Array(hash))
-//   return (hashArray.map(b => b.toString(16).padStart(2, '0')).join(''));
-// }
+// const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com/" : "http://localhost:3456";
 
 export default function Login(){
     const [, , , , , , setUserData] = useContext(VariableContext);
