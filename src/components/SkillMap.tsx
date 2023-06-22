@@ -15,6 +15,7 @@ export default function SkillMap() {
     
     useEffect(()=>{
       (async () =>{
+        // const data = await fetch(fetchURL+`/user-list/${10004}`).then(e=>e.json());
         const data = await fetch(fetchURL+`/user-list/${userData[0]["user-id"]}`).then(e=>e.json());
         setSkill(data);
       })();
@@ -24,8 +25,9 @@ export default function SkillMap() {
       <>
         {editFlag===1 && <EditSkill setEditFlag={setEditFlag} setSkill={setSkill}/>}
         <div className="container">
-        <UserProfile skills={skill}/>
-        <Skill skills={skill} setEditFlag={setEditFlag}/>
+          {/* // 左側コンテンツ */}
+          <UserProfile skills={skill}/>
+          <Skill skills={skill} setEditFlag={setEditFlag}/>
         </div>
       </>
     );

@@ -50,7 +50,6 @@
 .left>div{
     margin-top: 2vh;
     width: 90%;
-    /* height: ; */
 }
 
 .right>article>h2{
@@ -150,15 +149,15 @@
 
 }
 
-.left>figure+tr{
+.left>table>tbody>tr{
     display: flex;
     align-items: center;
     border: 1px solid gray;
-    width: 90%;
+    width: 96%;
     font-size: 90%;
 }
 
-.left>figure+tr>th,.left>figure+tr>td{
+.left>table>tbody>tr>th,.left>table>tbody>tr>td{
     width: 25%;
     height: 4.2vh;
     display: flex;
@@ -167,10 +166,46 @@
     border-right: 1px solid gray;
 }
 
-.left>figure+tr>td:last-child{
+.left>table>tbody>tr>td:last-child{
     border: none;
 }
 
-.left>figure+tr>th{
+.left>table>tbody>tr>th{
     background-color: #FFD3B4;
+    font-weight: bold;
+    color: rgb(64, 64, 64);
+}
+
+.profhead{
+    display: flex;
+    width: 100%;
+}
+
+.profhead>label{
+    width: 32%;
+    background-color: #D5ECC2;
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(64, 64, 64);
+    border-bottom: 1px solid rgb(64, 64, 64);
+    border-left: 1px solid rgb(64, 64, 64);
+}
+
+.profhead>label:last-child{
+    border-right: 1px solid rgb(64, 64, 64);
+}
+
+.profhead>label>p{
+    margin: 0;
+    width: 100%;
+    padding: 1vh 0;
+}
+
+.profhead+article{
+    width: 96%;
+    height: 25vh;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(64, 64, 64);
+    border-left: 1px solid rgb(64, 64, 64);
+    border-right: 1px solid rgb(64, 64, 64);
 }

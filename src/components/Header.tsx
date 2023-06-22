@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import "./Header.css";
+import Navigation from "./Header/Navigation";
 import UpperHead from "./Header/UpperHead";
 import LowerHead from "./Header/LowerHead";
 import { VariableContext } from "../App";
 const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
 
-export default function Header () {
+export default function Header ({setPage}:{setPage:React.Dispatch<React.SetStateAction<number>>}) {
   const [condition, setCondition] = useState({fil: "", order :"desc", keyWord: ""});
   const [, , , setPostedArray, , , ] = useContext(VariableContext);
 
@@ -32,7 +33,7 @@ export default function Header () {
 
   return (
     <header>
-      <img src="./systemImages/zamas.png" alt="zamas" className="zamas" />
+      <Navigation setPage={setPage} />
       <UpperHead condition={condition} setCondition={setCondition}/>
       <LowerHead condition={condition} setCondition={setCondition}/>
     </header>

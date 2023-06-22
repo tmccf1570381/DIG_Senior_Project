@@ -20,15 +20,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname,"./build")));
-
-// app.get('/', (req, res) => {
-//   res.send('Hello');
-// });
-
-app.get('/test', (req, res) => {
-  res.send('testでーーーす');
-});
 
 app.get("/user-list/:id", async (req, res)=>{
     const data = await knex.from("users")
