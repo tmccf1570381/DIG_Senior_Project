@@ -1,0 +1,128 @@
+.article {
+  width: 320px;
+  height: 45vh;
+  margin: 3vw;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.front, .back {
+  position: absolute;
+  width: 320px;
+  height: 45vh;
+  transition: all 0.6s;
+  backface-visibility: hidden;
+  background-color: #d5ecc289;
+  border-radius: 0.5rem;
+}
+
+.back {
+  transform: rotateY(-180deg);
+  background-color: #FFD3B4;
+}
+
+.article:hover .front{
+  transform: rotateY(180deg);
+}
+
+.article:hover .back{
+  transform: rotateY(0);
+}
+
+figure{
+  width: 100%;
+  height: 40%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img{
+  max-block-size: 70%;
+}
+
+.content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+table{
+  width: 90%;
+  font-size: 0.85rem;
+}
+
+thead>tr>th{
+  height: 9vh;
+  border-top: 2px solid gray;
+  font-size: 1rem;
+}
+
+tbody>tr>th{
+  width: 33%;
+  height: 3.5vh;
+  text-align: left;
+  font-weight: 100;
+}
+
+.back>h3{
+  margin-left: 1.2rem;
+  height: 10%;
+  margin-bottom:0;
+  text-decoration: underline;
+}
+
+.back>section{
+  margin-top: 2%;
+  height: 60%;
+  overflow-y: scroll;
+}
+
+.back>section+div{
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:0 0 0.5rem 0.5rem;
+  bottom: 0;
+}
+
+.back a+button{
+  font-size: 70%;
+  height: 4.5vh;
+  width: 30%;
+  margin: 0 1.5vw;
+}
+
+.back a{
+  width: 30%;
+  margin: 0 1.5vw;
+}
+
+.back a>button{
+  font-size: 70%;
+  width: 100%;
+  height: 4.5vh;
+}
+
+.back>section::-webkit-scrollbar{
+  display:none;
+}
+
+.back>section>ul>li{
+  margin-left: 0.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 90%;
+}
+
+.back>img{
+  position: absolute;
+  max-block-size: 8%;
+  right: 6%;
+  top: 5.5%;
+  padding: 1%;
+  border-bottom: #a1a1a1 2px dotted;
+}
