@@ -4,7 +4,7 @@ import Header from "./components/Header.tsx";
 import List from "./components/List.tsx";
 import Test from "./components/Test.tsx";
 
-
+// 強制的にTestを表示するようにしています！！
 export default function Main(){
     return (
         <>
