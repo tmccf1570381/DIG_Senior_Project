@@ -3,7 +3,7 @@ import "./App.css";
 import Main from './Main.tsx';
 import Login from "./components/Login";
 // const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com/" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com" : "http://localhost:3456";
 // console.log(process.env.NODE_ENV);
 // console.log(process.env.DATA_BASE);
 // console.log(fetchURL);
