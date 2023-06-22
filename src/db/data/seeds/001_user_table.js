@@ -19,7 +19,7 @@ exports.seed = async function(knex) {
     {"user-id": 10006, "first-name": '皿井', "last-name":"進","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10007, "first-name": '萩', "last-name":"巧実","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10008, "first-name": '坂本', "last-name":"龍征","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
-    {"user-id": 10009, "first-name": '馬場', "last-name":"翔也","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
+    {"user-id": 10009, "first-name": '馬場', "last-name":"祥也","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10010, "first-name": '太田', "last-name":"幸秀","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10011, "first-name": '木田', "last-name":"裕一","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
     {"user-id": 10012, "first-name": '早川', "last-name":"笙子","password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"},
