@@ -8,7 +8,7 @@ export default function Main(){
     const [page, setPage] = useState(1)
     return (
         <>
-        <Header setPage={setPage}/>
+        <Header page={page} setPage={setPage}/>
         <main>
             {
                 (()=>{

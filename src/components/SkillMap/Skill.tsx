@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
 type props ={
     skills:{
@@ -20,13 +20,38 @@ const deleteSkill = async(skills:props["skills"],ind:number)=>{
     console.log(res)
 }
 
-// {/* 右側コンテンツ */}
 export default function Skill ({skills, setEditFlag}:props){
     return (
-        <section className="right">
+        <section className="right">        
         <article>
             <h2>
-            certification
+                Experience
+                <FontAwesomeIcon className="skillEdit" icon={faPen} onClick={()=>{setEditFlag(1)}} />
+            </h2>
+            <div className="skillTable">
+                <div className="skillhead">
+                    <span>仕様言語など</span>
+                    <span>自信</span>
+                    <span>経験年数</span>
+                </div>
+                {skills.skill.map((e, ind)=>(
+                <div key={ind}>
+                    <span><li>{"JavaScript"}</li></span>
+                    <span style={{textAlign:"center"}}>{"🦀🦀🦀🦀"}</span>
+                    <span style={{textAlign:"center"}}>{"３年"}</span>
+                    <div className={String(ind)}  onClick={(e)=>{
+                        deleteSkill(skills,ind)
+                        }}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                    </div>
+                </div>
+            ))}
+            </div>
+        </article>
+
+        <article>
+            <h2>
+            Certification
             <FontAwesomeIcon className="skillEdit" icon={faPen} onClick={()=>{setEditFlag(1)}} />
             </h2>
             <div className="skillTable">
@@ -49,33 +74,6 @@ export default function Skill ({skills, setEditFlag}:props){
             ))}
             </div>
         </article>
-        
-        <article>
-            <h2>DIG Members</h2>
-            <div className="griduser">
-                <div>工事中</div>
-                <div>工事中</div>
-                {/* <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div>
-                <div>工事中</div> */}
-            </div>
-        </article>
-
-        {/* <article>
-            <h2>
-            experience
-            </h2>
-            <div>
-            <li>工事中</li>
-            </div>
-        </article> */}
         </section>
     )
 }

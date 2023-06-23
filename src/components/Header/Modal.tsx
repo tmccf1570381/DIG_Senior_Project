@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
 import { VariableContext } from "../../App";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 console.log(fetchURL);
 
 export default function Modal () {

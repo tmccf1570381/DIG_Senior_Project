@@ -5,7 +5,7 @@ import EditSkill from "./SkillMap/EditSkill.tsx";
 import UserProfile from "./SkillMap/UserProfile.tsx";
 import Skill from "./SkillMap/Skill.tsx";
 import { VariableContext } from "../App.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
 
 export default function SkillMap() {
@@ -27,6 +27,7 @@ export default function SkillMap() {
         <div className="container">
           {/* // 左側コンテンツ */}
           <UserProfile skills={skill}/>
+          {/* // 右側コンテンツ */}
           <Skill skills={skill} setEditFlag={setEditFlag}/>
         </div>
       </>

@@ -5,10 +5,10 @@ import Navigation from "./Header/Navigation";
 import UpperHead from "./Header/UpperHead";
 import LowerHead from "./Header/LowerHead";
 import { VariableContext } from "../App";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 
 
-export default function Header ({setPage}:{setPage:React.Dispatch<React.SetStateAction<number>>}) {
+export default function Header ({page, setPage}:{page:number, setPage:React.Dispatch<React.SetStateAction<number>>}) {
   const [condition, setCondition] = useState({fil: "", order :"desc", keyWord: ""});
   const [, , , setPostedArray, , , ] = useContext(VariableContext);
 
@@ -34,8 +34,8 @@ export default function Header ({setPage}:{setPage:React.Dispatch<React.SetState
   return (
     <header>
       <Navigation setPage={setPage} />
-      <UpperHead condition={condition} setCondition={setCondition}/>
-      <LowerHead condition={condition} setCondition={setCondition}/>
+      {page===1 && <UpperHead condition={condition} setCondition={setCondition}/>}
+      {page===1 && <LowerHead condition={condition} setCondition={setCondition}/>}
     </header>
   );
 };

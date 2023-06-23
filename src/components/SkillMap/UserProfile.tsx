@@ -56,11 +56,32 @@ export default function UserProfile({skills}:props){
                         (()=>{
                             switch(cont){
                                 case "career":
-                                    return <li>{skills["team"]}</li>
+                                    return (
+                                        <>
+                                        <h3>異動歴⇨</h3>
+                                        <li className="listcont">{"2023/04 デジタル変革推進室"}</li>
+                                        <li className="listcont">{"2020/04 品質保証部"}</li>
+                                        <li className="listcont">{"2019/04 コーポレートIT部"}</li>
+                                        </>
+                                    )
                                 case "position":
-                                    return skills["position"]
+                                    return(
+                                        <>
+                                        <h3>{skills["position"]}</h3>
+                                        </>
+                                    )
                                 case "character":
-                                    return skills["16person"]
+                                    return (
+                                        <>
+                                            <h3 style={{marginBottom:"1vh"}}>{skills["16person"]}</h3>
+                                            <hr />
+                                            <p style={{margin:"0",backgroundColor:"lightgray"}}>何かを成し遂げようとしている時、ルールなどない！</p>
+                                            <hr />
+                                            <a href="https://www.16personalities.com/ja/%E6%80%A7%E6%A0%BC%E8%A8%BA%E6%96%AD%E3%83%86%E3%82%B9%E3%83%88" target="_blank" rel="noreferrer">
+                                                <img src="https://www.16personalities.com/static/images/system/logo.svg" style={{maxWidth:"80%",marginTop:"1.5vh",}} alt="test" />
+                                            </a>
+                                        </>
+                                    )
                             }
                         })()
                     }
