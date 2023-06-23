@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./List.css";
 import { VariableContext } from "../App";
 import Modal from "./Header/Modal.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 const List= () => {

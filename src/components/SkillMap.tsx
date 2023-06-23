@@ -5,7 +5,7 @@ import EditSkill from "./SkillMap/EditSkill.tsx";
 import UserProfile from "./SkillMap/UserProfile.tsx";
 import Skill from "./SkillMap/Skill.tsx";
 import { VariableContext } from "../App.tsx";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 export default function SkillMap() {

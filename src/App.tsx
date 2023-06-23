@@ -3,7 +3,7 @@ import "./App.css";
 import Main from './Main.tsx';
 import Login from "./components/Login";
 // const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 type props={
   postedArray:

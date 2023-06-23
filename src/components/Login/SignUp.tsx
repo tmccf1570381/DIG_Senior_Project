@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas-463310277.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 const hash = async (password:string) => {
   const encoder = new TextEncoder().encode(password);
