@@ -30,7 +30,7 @@ export default function Skill ({skills, setEditFlag}:props){
             </h2>
             <div className="skillTable">
                 <div className="skillhead">
-                    <span>仕様言語など</span>
+                    <span>開発経験</span>
                     <span>自信</span>
                     <span>経験年数</span>
                 </div>

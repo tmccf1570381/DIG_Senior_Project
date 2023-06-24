@@ -9,7 +9,7 @@ type props ={
 }
 
 export default function EditSkill({setEditFlag, setSkill}:props){
-    const [newSkill, setNewSkill] = useState({skill:"",date:"",comment:""})
+    const [newSkill, setNewSkill] = useState({skill:"",date:""})
     const [, , , , , userData, ] = useContext(VariableContext);
 
     const updates = (e:any) => {
@@ -19,7 +19,6 @@ export default function EditSkill({setEditFlag, setSkill}:props){
     const skillSubmmit = async () => {
         const res = await fetch(fetchURL+`/new-skill`, {method: "POST", headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({...newSkill,"user-id":userData[0]["user-id"]})}).then(e=>e.json());
-        console.log(res);
         setSkill(res);
         setEditFlag(0);
     }
@@ -37,8 +36,6 @@ export default function EditSkill({setEditFlag, setSkill}:props){
             </datalist>
             {/* 合格日*/}
             <input type="date" name="date" placeholder="date of announcement" onChange={(e:any)=>{updates(e)}} required/>
-            {/* コメント */}
-            <input type="text" name="comment" placeholder="comment" onChange={(e:any)=>{updates(e)}}/>
             {/* ボタン */}
             <div className="buttonArea">
               <button onClick={skillSubmmit}>UPDATE</button>

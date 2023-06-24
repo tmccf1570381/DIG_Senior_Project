@@ -36,5 +36,7 @@ exports.seed = async function(knex) {
     {"user-id": 10023, "first-name": '西村', "last-name":"明彦","password": "admin"},
     {"user-id": 10024, "first-name": '津留', "last-name":"啓吾","password": "admin"},
     {"user-id": 10025, "first-name": '田邊', "last-name":"諒人","password": "admin"},
-  ]);
+    {"user-id": 10026, "first-name": '前垣', "last-name":"慶大","password": "admin"},
+    {"user-id": 10027, "first-name": '内木', "last-name":"悠一","password": "admin"},
+    ]);
 };
