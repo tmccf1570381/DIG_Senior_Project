@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import "./List.css";
 import { VariableContext } from "../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faLink, } from "@fortawesome/free-solid-svg-icons";
 import Modal from "./Header/Modal.tsx";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 const List= () => {
-  const [popup, , postedArray, setPostedArray] = useContext(VariableContext);
+  const [popup, , postedArray, setPostedArray, ,userData,] = useContext(VariableContext);
   const files = ["express", "css", "git", "html", "Java","TypeScript", "Knex", "React", "javaScript","AWS"]
   const upZamas = async (e:any) => {
     const res = await fetch(fetchURL+"/good", {method: "POST", headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({"g-id": Number(e.currentTarget.className)})}).then(e=>e.json());
+      body: JSON.stringify({"id": Number(e.currentTarget.className), "user-id":userData["user-id"]})}).then(e=>e.json());
     setPostedArray(res);
   };
   
@@ -53,8 +55,8 @@ const List= () => {
                 </ul>
             </section>
             <div>
-                <a href={e.url} target="_blank" rel="noopener noreferrer"><button>LINK</button></a>
-                <button className={String(e.id)} onClick={(e)=>upZamas(e)}>ZAMAS</button>
+                <a href={e.url} target="_blank" rel="noopener noreferrer"><button>Link <FontAwesomeIcon icon={faLink}/></button></a>
+                <button className={String(e.id)} onClick={(e)=>upZamas(e)}>ZAMAS <FontAwesomeIcon icon={faThumbsUp}/></button>
             </div>
           </div>
        </article>

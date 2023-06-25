@@ -4,10 +4,10 @@
  */
 exports.up = async function(knex) {
     await knex.schema.createTable("good", (table) => {
-        table.integer("g-id",32).primary();
-        table.integer("zamas",16);
+        table.integer("id",32);
+        table.integer("user-id",16);
 
-        table.foreign("g-id").references("posted.id");
+        table.foreign("user-id").references("users.user-id");
     })
 };
 

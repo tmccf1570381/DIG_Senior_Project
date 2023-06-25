@@ -13,7 +13,7 @@ export default function Modal () {
       const {comment, ...newData} = {
           ...postData,
           "post-date": `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`,
-          "user-id": userData[0]["user-id"]
+          "user-id": userData["user-id"]
       };
       const response = await fetch(fetchURL+`/posted`, {method: "POST", headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({posted:newData,comment})}).then(e=>e.json());

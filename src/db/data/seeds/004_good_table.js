@@ -3,18 +3,22 @@
  * @returns { Promise<void> } 
  */
 exports.seed = async function(knex) {
-  // Deletes ALL existing entries
   await knex('good').del()
   await knex('good').insert([
-    {"g-id": 1, zamas: 1},
-    {"g-id": 2, zamas: 100},
-    {"g-id": 3, zamas: 4},
-    {"g-id": 4, zamas: 3},
-    {"g-id": 5, zamas: 92},
-    {"g-id": 6, zamas: 1},
-    {"g-id": 7, zamas: 12},
-    {"g-id": 8, zamas: 11},
-    {"g-id": 9, zamas: 0},
-    {"g-id": 10, zamas: 0},
+    {"id": 1, "user-id": 10001},
+    {"id": 2, "user-id": 10001},
+    {"id": 5, "user-id": 10001},
+    {"id": 8, "user-id": 10001},
+    {"id": 9, "user-id": 10001},
+    {"id": 10, "user-id": 10001},
+    {"id": 1, "user-id": 10023},
+    {"id": 2, "user-id": 10023},
+    {"id": 4, "user-id": 10023},
+    {"id": 6, "user-id": 10023},
+    {"id": 8, "user-id": 10023},
+    {"id": 1, "user-id": 10004},
+    {"id": 4, "user-id": 10004},
+    {"id": 6, "user-id": 10004},
+    {"id": 7, "user-id": 10004},
   ]);
 };

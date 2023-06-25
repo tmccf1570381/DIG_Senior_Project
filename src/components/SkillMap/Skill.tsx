@@ -1,26 +1,22 @@
+import { useContext } from "react";
+import { VariableContext } from "../../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
+// const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 type props ={
-    skills:{
-    "user-id":number, 
-    "first-name":string, 
-    "last-name":string,
-    skill:{skill:string,date:string}[],
-    "16person":string,
-    "team":string,
-    "position":string},
     setEditFlag:React.Dispatch<React.SetStateAction<number>>
 }
 
-const deleteSkill = async(skills:props["skills"],ind:number)=>{
-    const res = await fetch(fetchURL+"/skill", {method: "DELETE", headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"user-id":skills["user-id"],skill:skills.skill[ind].skill})}).then(e=>e.json());
-    console.log(res)
-}
+// const deleteSkill = async(skills:props["skills"],ind:number)=>{
+//     const res = await fetch(fetchURL+"/skill", {method: "DELETE", headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({"user-id":skills["user-id"],skill:skills.skill[ind].skill})}).then(e=>e.json());
+//     console.log(res)
+// }
 
-export default function Skill ({skills, setEditFlag}:props){
+export default function Skill ({setEditFlag}:props){
+    const [, , , , , userData, ] = useContext(VariableContext);
+
     return (
         <section className="right">        
         <article>
@@ -34,14 +30,12 @@ export default function Skill ({skills, setEditFlag}:props){
                     <span>自信</span>
                     <span>経験年数</span>
                 </div>
-                {skills.skill.map((e, ind)=>(
+                {userData.explain.map((e, ind)=>(
                 <div key={ind}>
-                    <span><li>{"JavaScript"}</li></span>
-                    <span style={{textAlign:"center"}}>{"🦀🦀🦀🦀"}</span>
-                    <span style={{textAlign:"center"}}>{"３年"}</span>
-                    <div className={String(ind)}  onClick={(e)=>{
-                        deleteSkill(skills,ind)
-                        }}>
+                    <span><li>{e.experience}</li></span>
+                    <span style={{textAlign:"center"}}>{"🦀".repeat(e.confidence)}</span>
+                    <span style={{textAlign:"center"}}>{e.period}</span>
+                    <div className={String(ind)}  onClick={(e)=>{}}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </div>
                 </div>
@@ -60,14 +54,12 @@ export default function Skill ({skills, setEditFlag}:props){
                     <span>難易度</span>
                     <span>取得日</span>
                 </div>
-                {skills.skill.map((e, ind)=>(
+                {userData.skill.map((e, ind)=>(
                 <div key={ind}>
                     <span><li>{e.skill}</li></span>
-                    <span style={{textAlign:"center"}}>{"💙"}</span>
+                    <span style={{textAlign:"center"}}>{"💙".repeat(e.level)}</span>
                     <span style={{textAlign:"center"}}>{e.date}</span>
-                    <div className={String(ind)}  onClick={(e)=>{
-                        deleteSkill(skills,ind)
-                        }}>
+                    <div className={String(ind)}  onClick={(e)=>{}}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </div>
                 </div>

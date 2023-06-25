@@ -5,7 +5,7 @@
 exports.up = async function(knex) {
     await knex.schema.createTable("review", (table) => {
         table.increments("rev-id",32).primary();
-        table.integer("r-id",32).notNullable();
+        table.integer("id",32).notNullable();
         table.string("comment",256).notNullable();
     })
 };

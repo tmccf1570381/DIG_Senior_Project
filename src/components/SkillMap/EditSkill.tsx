@@ -5,12 +5,11 @@ const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:
 
 type props ={
     setEditFlag:React.Dispatch<React.SetStateAction<number>>,
-    setSkill:React.Dispatch<React.SetStateAction<any>>
 }
 
-export default function EditSkill({setEditFlag, setSkill}:props){
-    const [newSkill, setNewSkill] = useState({skill:"",date:""})
-    const [, , , , , userData, ] = useContext(VariableContext);
+export default function EditSkill({setEditFlag}:props){
+    const [newSkill, setNewSkill] = useState({"skill-cd":0,date:""})
+    const [, , , , , userData, setUserData ] = useContext(VariableContext);
 
     const updates = (e:any) => {
         setNewSkill({...newSkill,[e.currentTarget.name]:e.currentTarget.value})
@@ -18,8 +17,8 @@ export default function EditSkill({setEditFlag, setSkill}:props){
 
     const skillSubmmit = async () => {
         const res = await fetch(fetchURL+`/new-skill`, {method: "POST", headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...newSkill,"user-id":userData[0]["user-id"]})}).then(e=>e.json());
-        setSkill(res);
+        body: JSON.stringify({...newSkill,"user-id":userData["user-id"]})}).then(e=>e.json());
+        setUserData(res);
         setEditFlag(0);
     }
     
@@ -28,11 +27,11 @@ export default function EditSkill({setEditFlag, setSkill}:props){
         <section>
             <h1>✨Add New Skill✨</h1>
             {/* 資格名 */}
-            <input list="tags" name="skill" placeholder="certification" onChange={(e:any)=>{updates(e)}}/>
+            <input list="tags" name="skill-cd" placeholder="certification" onChange={(e:any)=>{updates(e)}}/>
             <datalist id="tags">
-              <option value="dummy"></option>
-              <option value="dummy2"></option>
-              <option value="dummy3"></option>
+              <option value="10"></option>
+              <option value="11"></option>
+              <option value="12"></option>
             </datalist>
             {/* 合格日*/}
             <input type="date" name="date" placeholder="date of announcement" onChange={(e:any)=>{updates(e)}} required/>

@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import "./Login.css";
 import { VariableContext } from "../App";
 import SignUp from "./Login/SignUp.tsx";
-// const fetchURL = process.env.NODE_ENV === "production" ? "http://dig-alb-3456-1025820283.us-east-1.elb.amazonaws.com:3456" : "http://localhost:3456";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 export default function Login(){
@@ -12,13 +11,10 @@ export default function Login(){
 
     const signIn = () => {
       (async () => {
-        // const hashPass = await hash(formValues.password);
-        let fetchData = await fetch(fetchURL+"/user", {
+        let fetchData = await fetch(fetchURL+"/users", {
           method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...formValues, password:formValues.password})})
           .then((e) => e.json()).catch((error) => {return false});
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         fetchData ? setUserData(fetchData) : alert("Sigin in failed... please confirm your id and password");
-        fetchData=null;
       })();
     };
 
