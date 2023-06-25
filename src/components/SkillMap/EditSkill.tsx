@@ -9,8 +9,7 @@ type props ={
 
 export default function EditSkill({setEditFlag}:props){
     const [newSkill, setNewSkill] = useState({"skill-cd":0,date:""})
-    const [, , , , , userData, setUserData ] = useContext(VariableContext);
-
+    const [, , , , , userData, setUserData] = useContext(VariableContext);
     const updates = (e:any) => {
         setNewSkill({...newSkill,[e.currentTarget.name]:e.currentTarget.value})
     }
@@ -23,7 +22,7 @@ export default function EditSkill({setEditFlag}:props){
     }
     
     return (
-      <div className="popUpBack">
+      <div className="popUpBack2">
         <section>
             <h1>✨Add New Skill✨</h1>
             {/* 資格名 */}

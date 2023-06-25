@@ -26,7 +26,8 @@
     "seed": "npx knex seed:run --knexfile src/db/knexfile.js",
     "rollback": "npx knex migrate:rollback --knexfile src/db/knexfile.js",
     "migrate-make": "npx knex migrate:make --knexfile src/db/knexfile.js",
-    "seed-make": "npx knex seed:make --knexfile src/db/knexfile.js"
+    "seed-make": "npx knex seed:make --knexfile src/db/knexfile.js",
+    "remake":"npm run rollback && npm run migrate && npm run seed"
   },
   "eslintConfig": {
     "extends": [

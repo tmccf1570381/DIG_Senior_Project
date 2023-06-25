@@ -4,10 +4,8 @@ import { useState } from "react";
 
 export default function UserProfile(){
     const [, ,postedArray , , , userData, ] = useContext(VariableContext);
-    console.log();
-    
-
     const [cont, setCont] = useState("career")
+    
     return(
         <section className="left">
             <figure>
@@ -17,7 +15,7 @@ export default function UserProfile(){
             <table>
                 <tbody>
                     <tr>
-                        <th>🖌️ post</th>
+                        <th>🖌️</th>
                         <td>{postedArray.filter(e => e["user-id"]===userData["user-id"]).length}</td>
                         <th>⭐️</th>
                         <td>{postedArray.filter(e => e["user-id"]===userData["user-id"]).map(e=>e.zamas).reduce((init,val)=>{return init+val},0)}</td>
@@ -46,9 +44,9 @@ export default function UserProfile(){
                                 case "career":
                                     return (
                                         <>
-                                        <h3>異動歴⇨</h3>
+                                        <h3>異動歴</h3>
                                         {userData.career.map((e,ind)=>{
-                                            return <li key={ind} className="listcont">{`${e["date-c"]} ${e.career}`}</li>
+                                            return <li key={ind} className="listcont">{`${e["date-c"]}`} <br />　　{`${e.career}`}</li>
                                         })}
                                         </>
                                     )
