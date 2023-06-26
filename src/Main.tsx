@@ -3,6 +3,7 @@ import SkillMap from "./components/SkillMap.tsx";
 import Header from "./components/Header.tsx";
 import List from "./components/List.tsx";
 
+import Sample from "./components/Sample.tsx";
 
 export default function Main(){
     const [page, setPage] = useState(1)
@@ -18,7 +19,7 @@ export default function Main(){
                         case 2:
                             return <SkillMap />
                         case 3:
-                            return <div>comming soon!</div>
+                            return <Sample />
                     }
                 })()
             }

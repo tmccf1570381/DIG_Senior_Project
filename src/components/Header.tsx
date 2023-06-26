@@ -9,7 +9,7 @@ const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:
 
 
 export default function Header ({page, setPage}:{page:number, setPage:React.Dispatch<React.SetStateAction<number>>}) {
-  const [condition, setCondition] = useState({fil: "", order :"desc", keyWord: ""});
+  const [condition, setCondition] = useState({fil: "", order :true, keyWord: ""});
   const [, , , setPostedArray, , , ] = useContext(VariableContext);
 
   useEffect(()=>{
@@ -19,11 +19,11 @@ export default function Header ({page, setPage}:{page:number, setPage:React.Disp
       let data = fetchData.filter((e:any)=> key.test(e.title.toLocaleLowerCase())||key.test(e.tag.toLocaleLowerCase()));
       if (condition.fil !== "") {
           let newData = data.filter((e:{tag:string}) => e.tag === condition.fil);
-          condition.order === "asc" && newData.reverse();
+          condition.order === true && newData.reverse();
           setPostedArray(newData);
           newData = null;
       }else{
-          condition.order === "asc" && data.reverse();
+          condition.order === true && data.reverse();
           setPostedArray(data);
       };
       fetchData = null;
@@ -34,8 +34,8 @@ export default function Header ({page, setPage}:{page:number, setPage:React.Disp
   return (
     <header>
       <Navigation setPage={setPage} />
-      {page===1 && <UpperHead condition={condition} setCondition={setCondition}/>}
-      {page===1 && <LowerHead condition={condition} setCondition={setCondition}/>}
+      {page === 1 && <UpperHead condition={condition} setCondition={setCondition}/>}
+      {page === 1 && <LowerHead condition={condition} setCondition={setCondition}/>}
     </header>
   );
 };

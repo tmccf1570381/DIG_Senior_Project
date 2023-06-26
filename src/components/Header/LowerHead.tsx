@@ -4,20 +4,15 @@ import { faStar, faSort, faSliders, faSquarePlus} from "@fortawesome/free-solid-
 import { VariableContext } from "../../App";
 
 type props = {
-    condition:{fil: string, order :string, keyWord: string},
+    condition:{fil: string, order :boolean, keyWord: string},
     setCondition:React.Dispatch<React.SetStateAction<props["condition"]>>
 }
 
 export default function LowerHead({condition, setCondition}:props){
     const [, setPopup, , , tagArray, , ] = useContext(VariableContext);
+
     return(
       <section>
-        {/* お気に入りフィルタ */}
-        <label>
-            <input type="checkbox" style={{visibility:"hidden",width:0,margin:0}} />
-            <FontAwesomeIcon  className="star" icon={faStar} />
-        </label>
-
         {/* タグフィルタ */}
         <label className="icon">
             <FontAwesomeIcon icon={faSliders}/>
@@ -26,19 +21,22 @@ export default function LowerHead({condition, setCondition}:props){
             <option value="" >-- select --</option>
             { tagArray.map((e, ind) => <option key={ind} value={e}>{e}</option>) }
         </select>
+        <label className="icon-end"></label>
+
+        {/* お気に入りフィルタ */}
+        <label className="icon2">
+            <input type="checkbox" style={{visibility:"hidden",width:0,margin:0}} onClick={()=>{}} />
+            <FontAwesomeIcon  className="star" icon={faStar} />
+        </label>
 
         {/* ソート */}
-        <label className="icon">
-            <FontAwesomeIcon icon={faSort}/>
+        <label className="icon2">
+            <input type="checkbox" style={{visibility:"hidden",width:0,margin:0}} onClick={()=>{setCondition(prev => ({...prev, order:!prev.order}))}}/>
+            <FontAwesomeIcon className="star" icon={faSort}/>
         </label>
-        <select name="oreder" id="order" onChange={e=>setCondition({...condition,order: e.currentTarget.value})}>
-            <option value="desc" >desc</option>
-            <option value="asc">asc</option>
-        </select>
-
 
         {/* 記事追加 */}
-        <label>
+        <label className="icon2">
             <FontAwesomeIcon className="star" icon={faSquarePlus} onClick={()=>{setPopup(true)}} />
         </label>
       </section>

@@ -16,7 +16,7 @@ header {
   margin: auto;
   margin-bottom: 0.95rem;
   width: 28vw;
-  height: 5vh;
+  height: 4.3vh;
   border-radius: 40px;
   background: whitesmoke;
 }
@@ -34,7 +34,7 @@ header {
 .search+section {
   display: flex;
   justify-content: center;
-  height: 33.5px;
+  height: 4.3vh;
 }
 
 header>section>label{
@@ -44,11 +44,9 @@ header>section>label{
 }
 
 section>select{
-  width: 8vw;
-  margin-right: 1.3vw;
+  width: 7vw;
   text-align: center;
   border: none;
-  border-radius: 0 0.7rem 0.7rem 0;
   cursor: pointer;
   outline: none;
 }
@@ -62,6 +60,23 @@ section>select{
   border-radius: 0.7rem 0 0 0.7rem;
   background-color: white;
   font-size: 75%;
+}
+
+.icon-end {
+  width: 13px;
+  background-color: white;
+  font-size: 75%;
+  margin-right: 1.3vw;
+  border-radius: 0 0.7rem 0.7rem 0;
+}
+
+.icon2{
+  width: 33.5px;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 75%;
+  margin-right: 1vw;
+
 }
 
 .orderIcon+select+button{
@@ -87,7 +102,7 @@ header>img{
 }
 
 .star{
-  color: white;
+  /* color: white; */
   text-align: center;
   font-size: 120%;
   margin: 0 1vw;
@@ -180,6 +195,7 @@ input:checked +.star{
   color: rgb(49, 49, 218);
   cursor: pointer;
 }
+
 .logos>nav>li:first-child{
   border-left: 1px whitesmoke solid;
 }
