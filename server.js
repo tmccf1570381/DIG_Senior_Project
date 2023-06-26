@@ -6,9 +6,7 @@ const app = express();
 const PORT = 3456;
 
 app.listen(PORT,async () => {
-  console.log(process.env.DB_HOST);
   console.log(process.env.DB_DATABASE);
-  console.log(process.env.NODE_ENV);
   console.log(`Server is running ${PORT} !`);
 });
 
@@ -18,6 +16,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
 app.use(bodyParser.json());
 
 app.post("/users", async (req, res) => {
@@ -76,6 +75,12 @@ app.post("/posted", async (req, res) => {
   }));
   res.status(200).send(response);
 });
+
+app.get("/good/:id", async (req, res) => {
+  const good = await knex.from("good")
+  .where("user-id", "=", req.params.id).then(e=>e.map(i=>i.id))
+  res.status(200).send({favorite: good});
+})
 
 app.post("/good", async (req, res) => {
   const check = await knex.from("good")

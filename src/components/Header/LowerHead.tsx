@@ -4,7 +4,7 @@ import { faStar, faSort, faSliders, faSquarePlus} from "@fortawesome/free-solid-
 import { VariableContext } from "../../App";
 
 type props = {
-    condition:{fil: string, order :boolean, keyWord: string},
+    condition:{fil: string, order :boolean, favorite:boolean, keyWord: string},
     setCondition:React.Dispatch<React.SetStateAction<props["condition"]>>
 }
 
@@ -25,7 +25,7 @@ export default function LowerHead({condition, setCondition}:props){
 
         {/* お気に入りフィルタ */}
         <label className="icon2">
-            <input type="checkbox" style={{visibility:"hidden",width:0,margin:0}} onClick={()=>{}} />
+            <input type="checkbox" style={{visibility:"hidden",width:0,margin:0}} onClick={()=>{setCondition(prev => ({...prev, favorite:!prev.favorite}))}} />
             <FontAwesomeIcon  className="star" icon={faStar} />
         </label>
 
