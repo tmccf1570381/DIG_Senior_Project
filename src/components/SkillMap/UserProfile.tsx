@@ -1,15 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { VariableContext } from "../../App";
 import { useState } from "react";
+const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 export default function UserProfile(){
-    const [, ,postedArray , , , userData, ] = useContext(VariableContext);
+    const [, ,postedArray , , , userData, ,src,setSrc] = useContext(VariableContext);
     const [cont, setCont] = useState("career")
+
+    useEffect(()=>{
+        (async ()=>{
+            const res = await fetch(fetchURL+`/aws/${userData["user-id"]}`).then(e=>e.json());
+            setSrc(res.src);
+        })()
+    })
     
     return(
         <section className="left">
             <figure>
-                <img src="./systemImages/hoshi52.png" alt="profile" />
+                {src.src !== "" 
+                 ? <img src={`data:image/png;base64,${src}`} alt="profile" />
+                 : <img src="./systemImages/hoshi52.png" alt="profile" />
+                }
                 <h2>{`${userData["first-name"]} ${userData["last-name"]}`}</h2>
             </figure>
             <table>

@@ -16,22 +16,26 @@ type props={
   setPostedArray:React.Dispatch<React.SetStateAction<props["postedArray"]>>,
   tagArray:string[],
   userData:props["userData"],
-  setUserData:React.Dispatch<React.SetStateAction<props["userData"]>>
+  setUserData:React.Dispatch<React.SetStateAction<props["userData"]>>,
+  src:{src:string},
+  setSrc:React.Dispatch<React.SetStateAction<{src:string}>>,
 ]};
 export const VariableContext = React.createContext<props["props"]>([false, ()=>{}, [], ()=>{}, [], 
-{"user-id":0,"first-name":"string","last-name":"string",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""}, ()=>{}]);
+{"user-id":0,"first-name":"string","last-name":"string",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""}, ()=>{}, {src:""}, ()=>{}]);
 
 export default function App() {
   const [postedArray, setPostedArray] = useState([{id:0,title:"","post-date":"",tag:"",url:"","user-id":0,"zamas":0,"first-name":"test" ,"last-name":"test",review:[""]}]);
   const [userData, setUserData] = useState({"user-id":0,"first-name":"","last-name":"",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""});
   const [tagArray, setTagArrat] = useState([""])
   const [popup, setPopup] = useState(false);
+  const [src, setSrc] = useState({src:""});
+
 
   useEffect(() => {
     const getData = async () => {
       const postdata = await fetch(fetchURL+"/posted").then(e=>e.json());
       setPostedArray(postdata);
-      const tagArray = postdata.filter((e:any)=> e.tag !== "").map((e:any)=>e.tag)//;
+      const tagArray = postdata.filter((e:any)=> e.tag !== "").map((e:any)=>e.tag);
       setTagArrat(tagArray.filter((e:any, ind:number) => tagArray.indexOf(e) === ind));
     };
     getData();
@@ -39,7 +43,7 @@ export default function App() {
 
   return (
     <>
-    <VariableContext.Provider value={[popup, setPopup, postedArray, setPostedArray, tagArray, userData, setUserData]}>
+    <VariableContext.Provider value={[popup, setPopup, postedArray, setPostedArray, tagArray, userData, setUserData, src, setSrc]}>
       {userData["user-id"] === 0  
       ? <Login />
       : <Main />

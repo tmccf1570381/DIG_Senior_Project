@@ -18,8 +18,8 @@ export default function Header ({page, setPage}:{page:number, setPage:React.Disp
       let key = new RegExp(condition.keyWord.toLocaleLowerCase());
       let data = fetchData.filter((e:any)=> key.test(e.title.toLocaleLowerCase())||key.test(e.tag.toLocaleLowerCase()));
       let favorite = await fetch(fetchURL+`/good/${userData["user-id"]}`).then(e=>e.json());
-      
       data = condition.favorite ? data.filter((e:any) => favorite.favorite.indexOf(e.id) !== -1) :data;
+      
       if (condition.fil !== "") {
           let newData = data.filter((e:{tag:string}) => e.tag === condition.fil);
           condition.order === true && newData.reverse();
