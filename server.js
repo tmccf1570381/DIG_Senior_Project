@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const knex = require("./src/db/index");
 const app = express();
-const { S3Client, GetObjectCommand,ListObjectsV2Command } = require("@aws-sdk/client-s3");
+const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const PORT = 3456;
 
 app.listen(PORT,async () => {
@@ -206,8 +206,8 @@ app.get("/aws/:id", async (req, res)=>{
   const client = new S3Client({ 
     region: "us-east-1",
     credentials: {
-        accessKeyId: 'AKIA25NICGAUECGHD6PF',
-        secretAccessKey:'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'}
+        accessKeyId: process.env.S3_KEY,
+        secretAccessKey:process.env.S3_SKEY}
   });
 
   const result = await client.send(
@@ -217,7 +217,6 @@ app.get("/aws/:id", async (req, res)=>{
     })
   ).catch(e=>e);
 
-  // console.log(result.Body);
   const arr = await result.Body?.transformToString("base64");
   res.status(200).send({src:arr})
 })
