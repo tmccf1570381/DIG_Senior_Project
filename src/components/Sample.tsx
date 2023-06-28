@@ -20,8 +20,6 @@ export default function Sample(){
         })();
     },[])
     
-
-
     // const getIdToken = async () => {
     //     const client = new CognitoIdentityProviderClient({
     //         apiVersion: COGNITO_API_VERSION,

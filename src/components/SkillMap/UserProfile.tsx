@@ -10,7 +10,7 @@ export default function UserProfile(){
     useEffect(()=>{
         (async ()=>{
             const res = await fetch(fetchURL+`/aws/${userData["user-id"]}`).then(e=>e.json());
-            setSrc(res.src);
+            res.src && setSrc(res.src);
         })()
     })
     
