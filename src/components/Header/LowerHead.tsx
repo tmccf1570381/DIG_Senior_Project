@@ -3,13 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faSort, faSliders, faSquarePlus} from "@fortawesome/free-solid-svg-icons";
 import { VariableContext } from "../../App";
 
-type props = {
-    condition:{fil: string, order :boolean, favorite:boolean, keyWord: string},
-    setCondition:React.Dispatch<React.SetStateAction<props["condition"]>>
-}
-
-export default function LowerHead({condition, setCondition}:props){
-    const [, setPopup, , , tagArray, , ] = useContext(VariableContext);
+export default function LowerHead(){
+    const [, setPopup, , , tagArray, , , , , condition, setCondition ] = useContext(VariableContext);
 
     return(
       <section>

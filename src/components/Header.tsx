@@ -9,8 +9,7 @@ const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:
 
 
 export default function Header ({page, setPage}:{page:number, setPage:React.Dispatch<React.SetStateAction<number>>}) {
-  const [condition, setCondition] = useState({fil: "", order: true, favorite: false, keyWord: ""});
-  const [, , , setPostedArray, , userData, ] = useContext(VariableContext);
+  const [, , , setPostedArray, , userData, , , , condition, ] = useContext(VariableContext);
 
   useEffect(()=>{
     (async () => {
@@ -24,21 +23,19 @@ export default function Header ({page, setPage}:{page:number, setPage:React.Disp
           let newData = data.filter((e:{tag:string}) => e.tag === condition.fil);
           condition.order === true && newData.reverse();
           setPostedArray(newData);
-          newData = null;
       }else{
           condition.order === true && data.reverse();
           setPostedArray(data);
       };
-      fetchData = null;
-      data = null;
     })();
   },[condition]);
+
 
   return (
     <header>
       <Navigation setPage={setPage} />
-      {page === 1 && <UpperHead condition={condition} setCondition={setCondition}/>}
-      {page === 1 && <LowerHead condition={condition} setCondition={setCondition}/>}
+      {page === 1 && <UpperHead />}
+      {page === 1 && <LowerHead />}
     </header>
   );
 };

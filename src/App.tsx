@@ -19,17 +19,21 @@ type props={
   setUserData:React.Dispatch<React.SetStateAction<props["userData"]>>,
   src:{src:string},
   setSrc:React.Dispatch<React.SetStateAction<{src:string}>>,
+  condition:{fil: string, order: boolean, favorite: boolean, keyWord: string, zamas:boolean},
+  setCondition:React.Dispatch<React.SetStateAction<{fil: string, order: boolean, favorite: boolean, keyWord: string, zamas:boolean}>>,
 ]};
-export const VariableContext = React.createContext<props["props"]>([false, ()=>{}, [], ()=>{}, [], 
-{"user-id":0,"first-name":"string","last-name":"string",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""}, ()=>{}, {src:""}, ()=>{}]);
+export const VariableContext = React.createContext<props["props"]>([
+  false, ()=>{}, [], ()=>{}, [], {"user-id":0,"first-name":"","last-name":"",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""}, 
+  ()=>{}, {src:""}, ()=>{}, {fil: "", order: true, favorite: false, keyWord: "", zamas:true}, ()=>{}]);
 
 export default function App() {
   const [postedArray, setPostedArray] = useState([{id:0,title:"","post-date":"",tag:"",url:"","user-id":0,"zamas":0,"first-name":"test" ,"last-name":"test",review:[""]}]);
   const [userData, setUserData] = useState({"user-id":0,"first-name":"","last-name":"",skill:[{skill:"",date:"",level:0}],explain:[{experience:"",period:"",confidence:0}],career:[{career: "", "date-c": ""}],"16person":"",supple:"",team:"",role:""});
+  // const [userData, setUserData] = useState(VariableContext["_currentValue2"][5]);
   const [tagArray, setTagArrat] = useState([""])
   const [popup, setPopup] = useState(false);
   const [src, setSrc] = useState({src:""});
-
+  const [condition, setCondition] = useState({fil: "", order: true, favorite: false, keyWord: "", zamas:true});
 
   useEffect(() => {
     const getData = async () => {
@@ -43,7 +47,7 @@ export default function App() {
 
   return (
     <>
-    <VariableContext.Provider value={[popup, setPopup, postedArray, setPostedArray, tagArray, userData, setUserData, src, setSrc]}>
+    <VariableContext.Provider value={[popup, setPopup, postedArray, setPostedArray, tagArray, userData, setUserData, src, setSrc, condition, setCondition]}>
       {userData["user-id"] === 0  
       ? <Login />
       : <Main />

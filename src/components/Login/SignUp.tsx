@@ -2,21 +2,13 @@ import React, { useState } from "react";
 import "./SignUp.css";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
-const hash = async (password:string) => {
-  const encoder = new TextEncoder().encode(password);
-  const hash = await crypto.subtle.digest('SHA-256', encoder);
-  const hashArray = Array.from(new Uint8Array(hash))
-  return (hashArray.map(b => b.toString(16).padStart(2, '0')).join(''));
-};
-
 const SignUp = ({setSignupFlag}:{setSignupFlag:React.Dispatch<React.SetStateAction<boolean>>}) => {
   const [inputData, setInputData] = useState({"user-id": "", "first-name": "", "last-name": "",  password: ""});
 
   const submit = () => {
     (async () => {
-      const hashPass = await hash(inputData.password);
       const response = await fetch(fetchURL+"/singnup", { method: "POST",headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({...inputData, password: hashPass})})
+        body: JSON.stringify({...inputData, password: inputData.password})})
         .then((e) => e.json()).catch(() => false);
       switch(response){
         case 1:

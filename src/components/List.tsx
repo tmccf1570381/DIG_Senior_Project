@@ -8,12 +8,13 @@ const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:
 
 
 const List= () => {
-  const [popup, , postedArray, setPostedArray, ,userData,] = useContext(VariableContext);
+  const [ popup, , postedArray, , , userData, , , , , setCondition] = useContext(VariableContext);
   const files = ["express", "css", "git", "html", "Java","TypeScript", "Knex", "React", "javaScript","AWS"]
+
   const upZamas = async (e:any) => {
-    const res = await fetch(fetchURL+"/good", {method: "POST", headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({"id": Number(e.currentTarget.className), "user-id":userData["user-id"]})}).then(e=>e.json());
-    setPostedArray(res);
+    await fetch(fetchURL+"/good", {method: "POST", headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({"id": Number(e.currentTarget.className), "user-id":userData["user-id"]})}).then(e=>e.json());
+    setCondition(prev => ({...prev, zamas: !prev.zamas}));
   };
   
   return (
