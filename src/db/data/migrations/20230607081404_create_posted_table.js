@@ -8,7 +8,7 @@ exports.up = async function(knex) {
         table.string("title",128).notNullable();
         table.string("post-date",16).notNullable();
         table.string("tag",32).notNullable();
-        table.string("url").notNullable();
+        table.string("url",4096).notNullable();
         table.integer("user-id",32).notNullable();
 
         table.foreign("user-id").references("users.user-id");

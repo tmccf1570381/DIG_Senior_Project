@@ -42,7 +42,7 @@ const SignUp = ({setSignupFlag}:{setSignupFlag:React.Dispatch<React.SetStateActi
                         placeholder="user id  (※number only)" value={inputData["user-id"]} required
                         onChange={(e) =>setInputData({...inputData,[e.target.name]: e.target.value})}/>
                         <p>FIRST NAME</p>
-                        <input type="text" name="first-name" placeholder="lirst name" value={inputData["first-name"]}
+                        <input type="text" name="first-name" placeholder="first name" value={inputData["first-name"]}
                         onChange={(e) => setInputData({...inputData,[e.target.name]: e.target.value})}/>
                         <p>LAST NAME</p>
                         <input type="text" name="last-name" placeholder="last name" value={inputData["last-name"]}
