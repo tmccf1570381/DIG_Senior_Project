@@ -9,7 +9,7 @@ const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:
 
 const List= () => {
   const [ popup, , postedArray, , , userData, , , , , setCondition] = useContext(VariableContext);
-  const files = ["express", "css", "git", "html", "Java","TypeScript", "Knex", "React", "javaScript","AWS"]
+  const files = ["車検", "CXM", "予算", "html", "Java","TypeScript", "Knex", "React", "javaScript","AWS"]
 
   const upZamas = async (e:any) => {
     await fetch(fetchURL+"/good", {method: "POST", headers: {'Content-Type': 'application/json'},

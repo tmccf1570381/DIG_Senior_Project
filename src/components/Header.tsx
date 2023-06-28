@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Header.css";
 import Navigation from "./Header/Navigation";
 import UpperHead from "./Header/UpperHead";
