@@ -25,7 +25,7 @@ export default function NewHeader(){
                 <figure className="new-prof">
                     {src !== "" 
                     ? <img src={`data:image/png;base64,${src}`} alt="profile" />
-                    : <img src="./icons/else.svg" alt="profile" />}
+                    : <img src="./systemImages/else.png" alt="profile" />}
                 </figure>
             </section>
         </>
