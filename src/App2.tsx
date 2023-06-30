@@ -1,9 +1,10 @@
-import Navvar from "./Navvar";
-import NewHeader from "./NewHeader";
-import Card from "./Card";
+import Navvar from "./components/Navvar";
+import "./App.css"
+import NewHeader from "./components/NewHeader";
+import Card from "./components/Card";
 import React, { useEffect, useState, createContext } from "react";
-import Login from "./Login";
-import NewModal from "./NewModal";
+import Login from "./components/Login";
+import NewModal from "./components/NewModal";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 type props={

@@ -1,7 +1,7 @@
 import "./Navvar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags, faStar, faPenToSquare, faCircleUser, faRankingStar } from "@fortawesome/free-solid-svg-icons";
-import { NewValContext } from "./App2";
+import { NewValContext } from "../App2";
 import { useContext, useState } from "react";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 

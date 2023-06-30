@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import "./NewHeader.css"
 import SearchBox from "./SearchBox"
-import { NewValContext } from "./App2";
+import { NewValContext } from "../App2";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 export default function NewHeader(){
