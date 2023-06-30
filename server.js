@@ -8,6 +8,7 @@ const PORT = 3456;
 
 app.listen(PORT,async () => {
   console.log(process.env.DB_DATABASE);
+    // const user = 10023;
   console.log(`Server is running ${PORT} !`);
 });
 
@@ -50,7 +51,7 @@ app.get("/posted", async (req, res) => {
   const good = await knex.from("good");
   const posted = await knex.from("posted")
   .leftJoin("users","posted.user-id", "users.user-id")
-  .select(["id","posted.user-id", "title","post-date","tag","url","first-name","last-name"]);
+  .select(["id","posted.user-id", "title","post-date","tag","url","first-name","last-name","doctype"]);
 
   const response = posted.map(e=>({...e, 
     review: review.filter(i=> i.id === e.id).map(e=>e.comment),
@@ -66,7 +67,7 @@ app.post("/posted", async (req, res) => {
 
   const posted = await knex.from("posted")
   .leftJoin("users","posted.user-id", "users.user-id")
-  .select(["id","posted.user-id","title","post-date","tag","url","first-name","last-name"]);
+  .select(["id","posted.user-id","title","post-date","tag","url","first-name","last-name","doctype"]);
   const review = await knex.from("review");
   const good = await knex.from("good");
   const response = posted.map(e=>({
@@ -76,6 +77,14 @@ app.post("/posted", async (req, res) => {
   }));
   res.status(200).send(response);
 });
+
+app.delete("/posted", async (req, res) => {
+  await knex.from("good").where("id", "=", req.body.id).del();
+  await knex.from("review").where("id", "=", req.body.id).del();
+  await knex.from("posted").where("id", "=", req.body.id).del();
+
+  res.send({test:"ol"})
+})
 
 app.get("/good/:id", async (req, res) => {
   const good = await knex.from("good")
@@ -100,7 +109,7 @@ app.post("/good", async (req, res) => {
   const good = await knex.from("good");
   const posted = await knex.from("posted")
   .leftJoin("users","posted.user-id", "users.user-id")
-  .select(["id","posted.user-id","title","post-date","tag","url","first-name","last-name"]);
+  .select(["id","posted.user-id","title","post-date","tag","url","first-name","last-name","doctype"]);
 
   const response = posted.map(e=>({...e, 
     review: review.filter(i=> i.id === e.id).map(e=>e.comment),
@@ -219,4 +228,12 @@ app.get("/aws/:id", async (req, res)=>{
 
   const arr = await result.Body?.transformToString("base64");
   res.status(200).send({src:arr})
+})
+
+app.post("/review", async (req,res) => {
+  await knex.from("review").where("id", "=", req.body["id"]).del();
+  const insertObj = req.body.review.reduce((init,val)=>([...init,{id:req.body.id,comment:val}]),[])
+  await knex('review').insert(insertObj);
+
+  res.send({t:"ok"})
 })

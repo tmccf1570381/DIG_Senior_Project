@@ -1,4 +1,4 @@
-main{
+/* main{
   position: absolute;
   top: 15vh;
   height: 85vh;
@@ -7,4 +7,25 @@ main{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   place-items: center;
+} */
+
+main{
+  position: absolute;
+  top: 11vh;
+  height: 89vh;
+  width: 100vw;
+}
+
+.new-content-area{
+  position: absolute;
+  left: 26vw;
+  width: 71vw;
+  height: 89vh;
+  padding-left: 3vw;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, min(320px));
+  grid-template-rows:300px;
+  gap: 60px 10px;
+  place-items: end center;
 }

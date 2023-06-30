@@ -1,0 +1,141 @@
+.new-card{
+    border-radius: 10px;
+    border: 4px solid #D5ECC2;
+    width: 270px;
+    height: 250px;
+}
+
+.new-card-head{
+    background-color: #D5ECC2;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.new-icon{
+    color: azure;
+    font-size: 180%;
+    margin: 0 0.8vw 0 0.5vw;
+}
+
+.new-icon+span{
+    width: 18px;
+    text-align: center;
+    margin-left: -37px;
+    margin-top: 9px;
+    position: absolute;
+    font-size: 50%;
+    color: rgb(153, 153, 153);
+}
+
+.yellow{
+    color: yellow;
+}
+
+.new-card-head>h3{
+    margin: 0;
+    font-size: 90%;
+    color: rgb(54, 54, 54);
+    text-decoration: none;
+    width: 160px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.new-card-head>figure{
+    background-color: white;
+    border: 3px solid #D5ECC2;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    top: -15px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow:column;
+}
+
+.new-card-head>figure>img{
+    object-fit: cover;
+}
+
+.new-card-body{
+    padding: 12px 10px;
+    font-size: 90%;
+    padding-bottom: 5px;
+}
+
+.new-card-body>div{
+    margin-bottom: 8px;
+}
+
+.new-card-body>div:last-child{
+    margin-bottom: 0;
+}
+
+.new-card-body div>nav{
+    font-size: 80%;
+    color: rgb(163, 163, 163);
+    margin-bottom: 2px;
+}
+
+.new-card-parallel{
+    display: flex;
+}
+
+.new-card-parallel>div{
+    width: 50%;
+}
+
+.new-card-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-card-button>a>button{
+    border-radius: 5px;
+    padding: 7px;
+    width: 150px;
+    font-size: 80%;
+    color: rgb(54, 54, 54);
+    border: none;
+    cursor: pointer;
+}
+
+.new-card-button>a>button:hover{
+    background-color: #68b39d;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.new-review{
+    height: 45px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.new-card-button>button{
+    font-size: 90%;
+    padding: 7px;
+    border: none;
+    cursor: pointer; 
+    border-radius: 50%;
+    margin-left: 1vw;
+}
+
+.new-dust-icon:hover{
+    background-color: #FFAAA7;
+    color: white;
+}
+
+.new-edit-icon:hover{
+    background-color: #FFD3B4;
+}

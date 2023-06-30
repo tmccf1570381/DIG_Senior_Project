@@ -1,0 +1,131 @@
+.major-item{
+    background-color: #D5ECC2;
+    height: 100%;
+    width: 6vw;
+    position: absolute;
+    left: 0;
+}
+
+.major-item-list{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    height: 6vw;
+    border-bottom: 1.5px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 250%;
+    color: rgb(190, 190, 190);
+}
+
+.major-item-list:last-child{
+    position: absolute;
+    bottom: 0;
+    border-top: 1.5px solid white;
+}
+
+.minor-item{
+    background-color: #c3d2b7;
+    height: 100%;
+    width: 18vw;
+    position: absolute;
+    left:6vw;
+    padding: 0 1vw;
+}
+
+.minor-item>h3{
+    margin: 15px 0;
+    color: #447566;
+    text-decoration: underline;
+}
+
+.minor-item>input{
+    width: 16vw;
+    padding: 0 1vw;
+    height: 5vh;
+    border: none;
+    border-radius: 5px;
+}
+
+.minor-item>textarea{
+    padding: 1vh 1vw;
+    border: none;
+    border-radius: 5px;
+}
+
+.minor-item>select{
+    width: 18vw;
+    height: 5vh;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    padding: 0 1vw;
+}
+
+.new-post-tittle{
+    margin-bottom: 1vh;
+}
+
+.minor-item-row{
+    width: 100%;
+    padding-bottom: 3px;
+    margin: 10px 0;
+    border-bottom: 2px solid white;
+    font-size: 95%;
+}
+
+.minor-item-row-num{
+    position: absolute;
+    right: 1vw;
+    width: 2.5vw;
+    padding: 0.2vh 0;
+    background-color: #FFD3B4;
+    border-radius: 40px;
+    color: rgb(54, 54, 54);
+    font-size: 80%;
+    text-align: center;
+}
+
+.major-item-list>input:checked ~ .new-icon-nav{
+    color: #68b39d;
+}
+
+.major-item-list>input:checked ~ .new-icon-nav:last-child{
+    color: #FFAAA7;
+}
+
+.major-item-list>input:checked ~ .new-icon-select{
+    position: absolute;
+    right: 0;
+    border-top: 20px solid transparent;
+    border-right: 20px solid #c3d2b7;
+    border-bottom: 20px solid transparent;
+}
+
+.new-post-area{
+    margin-top: 3vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-post-area>button{
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+    background-color: #FFAAA7;
+    font-weight: bold;
+}
+
+.select-tag{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 4vh;
+}
+
+.select-tag>span{
+    margin-left: 0.5vw;
+}
