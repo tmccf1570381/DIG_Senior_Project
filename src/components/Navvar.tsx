@@ -1,6 +1,6 @@
 import "./Navvar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTags, faStar, faPenToSquare, faCircleUser, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { NewValContext } from "../App2";
 import { useContext, useState } from "react";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
@@ -13,7 +13,7 @@ export default function Navvar(){
     const today = new Date(); 
 
     const handler = (e:any) => {
-        setInput(prev => ({...prev, [e.target.id]:e.target.value}) )
+        setInput(prev => ({...prev, [e.target.id]:e.target.value}));
     }
     const postData = async () => {
         switch(Object.values(input).indexOf("")){
@@ -38,28 +38,17 @@ export default function Navvar(){
     return(
         <>
             <section className="major-item">
-                <label className="major-item-list">
+                <label className={tab === 1 ? `major-item-list post-color` : `major-item-list`}>
                     <input type="radio" name="navvar" style={{display:"none"}}  onClick={()=>{setTab(1)}}/>
-                    <FontAwesomeIcon className="new-icon-nav" icon={faPenToSquare}/>
-                    <div className="new-icon-select"></div>
+                    <FontAwesomeIcon className="new-icon-nav" icon={faPlus}/>
                 </label>
-                <label className="major-item-list">
+                <label className={tab === 2 ? `major-item-list post-color` : `major-item-list`}>
                     <input type="radio" name="navvar" style={{display:"none"}} defaultChecked onClick={()=>{setTab(2)}}/>
-                    <FontAwesomeIcon className="new-icon-nav" icon={faTags}/>
-                    <div className="new-icon-select"></div>
+                    <FontAwesomeIcon className="new-icon-nav" icon={faFilter}/>
                 </label>
-                <label className="major-item-list">
-                    <input type="checkbox" style={{display:"none"}} onClick={()=>{setRule({...rule,own: !rule.own})}}/>
-                    <FontAwesomeIcon className="new-icon-nav" icon={faCircleUser} />
-                </label>
-                <label className="major-item-list">
-                    <input type="checkbox" style={{display:"none"}} onClick={()=>{setRule({...rule,favorite: !rule.favorite})}}/>
-                    <FontAwesomeIcon className="new-icon-nav" icon={faStar}/>
-                </label>
-                <label className="major-item-list">
+                <label className={tab === 3 ? `major-item-list post-color` : `major-item-list`}>
                     <input type="radio" name="navvar" style={{display:"none"}} onClick={()=>{setTab(3)}}/>
                     <FontAwesomeIcon className="new-icon-nav" icon={faRankingStar}/>
-                    <div className="new-icon-select"></div>
                 </label>
             </section>
 
@@ -116,7 +105,20 @@ export default function Navvar(){
                                         <option value="teams">Teams</option>
                                         <option value="web">Webサイト</option>
                                         <option value="else">その他</option>
-                                    </select>
+                                </select>
+                                <h3>📍 個人設定</h3>
+                                <div className="minor-item-row">
+                                    <label className="select-tag">
+                                        <input type="checkbox" name="favorite" onClick={()=>{setRule({...rule,favorite: !rule.favorite})}}/>
+                                        <span><FontAwesomeIcon className="new-icon-nav" icon={faStar}/> お気入り</span>
+                                    </label>
+                                </div>
+                                <div className="minor-item-row">
+                                    <label className="select-tag">
+                                        <input type="checkbox" name="history" onClick={()=>{setRule({...rule,own: !rule.own})}}/>
+                                        <span><FontAwesomeIcon className="new-icon-nav" icon={faClockRotateLeft}/> 投稿履歴</span>
+                                    </label>
+                                </div>
                                 <h3>🏷️ タグ</h3>
                                 <div className="minor-item-row">
                                         <label className="select-tag">
