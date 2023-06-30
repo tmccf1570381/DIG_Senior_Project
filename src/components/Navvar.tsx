@@ -109,13 +109,13 @@ export default function Navvar(){
                                 <h3>📍 個人設定</h3>
                                 <div className="minor-item-row">
                                     <label className="select-tag">
-                                        <input type="checkbox" name="favorite" onClick={()=>{setRule({...rule,favorite: !rule.favorite})}}/>
+                                        <input type="checkbox" defaultChecked={rule.favorite} name="favorite" onClick={()=>{setRule({...rule,favorite: !rule.favorite})}}/>
                                         <span><FontAwesomeIcon className="new-icon-nav" icon={faStar}/> お気入り</span>
                                     </label>
                                 </div>
                                 <div className="minor-item-row">
                                     <label className="select-tag">
-                                        <input type="checkbox" name="history" onClick={()=>{setRule({...rule,own: !rule.own})}}/>
+                                        <input type="checkbox" name="history" defaultChecked={rule.own} onClick={()=>{setRule({...rule,own: !rule.own})}}/>
                                         <span><FontAwesomeIcon className="new-icon-nav" icon={faClockRotateLeft}/> 投稿履歴</span>
                                     </label>
                                 </div>
