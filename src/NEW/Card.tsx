@@ -38,7 +38,7 @@ export default function Card({arr, setModify}:props){
                 </label>
                 <h3>{arr.title}</h3>
                 <figure>
-                    <img src={`./icons/${arr.doctype}.png`} alt="document" />
+                    <img src={`./icons/${arr.doctype}.svg`} alt="document" />
                 </figure>
             </section>
 
