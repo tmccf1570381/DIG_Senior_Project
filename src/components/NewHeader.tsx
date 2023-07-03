@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react"
 import "./NewHeader.css"
 import SearchBox from "./SearchBox"
 import { NewValContext } from "../App2";
+import { Auth } from 'aws-amplify';
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 export default function NewHeader(){
     const [src, setSrc] = useState("");
-    const [,,,,,,user] = useContext(NewValContext);
+    const [,,,,, setUser, user, setCognito] = useContext(NewValContext);
 
     useEffect(()=>{
         (async ()=>{
@@ -15,11 +16,22 @@ export default function NewHeader(){
         })();
     },[]);
 
+    async function signOut() {
+        setUser(0);
+        try {
+            await Auth.signOut();
+            setCognito(0);
+            alert("ログアウトしました")
+        }catch (error) {
+            setCognito(2);
+        }
+    };
+
     return(
         <>
             <section className="new-header">
                 <div>
-                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%"}}/>
+                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%",cursor:"pointer"}} onClick={signOut}/>
                 </div>
                 <SearchBox />
                 <figure className="new-prof">

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import "./NewModal.css";
 import { NewValContext } from "../App2";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
@@ -41,22 +41,22 @@ export default function NewModal({modify ,setModify}:props){
             <article className="new-modal-article">
                 <div style={{display:"flex"}}>
                     <div className="new-modal-L">
-                        <h4>title</h4>
+                        <h4>ナレッジ</h4>
                         <input type="text" id="title" onChange={(e)=>{handler2(e)}} value={modify.title} />
                     </div>
                     <div className="new-modal-R">
-                        <h4>tags</h4>
+                        <h4>タグ</h4>
                         <select name="tag" id="tag" value={modify.tag} onChange={(e)=>{handler2(e)}}> 
                             <option value="">-- choose one --</option>
                             {tag[0].map(e => <option key={e} value={e}>{e}</option>)}
                         </select>
                     </div>
                 </div>
-                <h4>comment</h4>
+                <h4>コメント</h4>
                 <div className="new-modal-cmment-area">
                     {comment.map((e,ind)=><input key={ind} id={String(ind)} type="text" value={e} onChange={(e)=>{handler(e)}}/>)}
                     <div style={{display:"flex"}}>
-                        <button className="addRow" onClick={()=>{setComment(prev=>[...prev,""])}}><FontAwesomeIcon className="new-icon-nav" icon={faUserPlus}/></button>
+                        <button className="addRow" onClick={()=>{setComment(prev=>[...prev,""])}}><FontAwesomeIcon icon={faCommentDots}/></button>
                     </div>
                 </div>
                 <div className="new-modal-button-area">

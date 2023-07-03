@@ -2,6 +2,7 @@ import "./Navvar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { NewValContext } from "../App2";
+import Ranking from "./Ranking";
 import { useContext, useState } from "react";
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
@@ -59,7 +60,7 @@ export default function Navvar(){
                             return (
                                 <section className="minor-item">
                                     <h3>🎉 新規投稿</h3>
-                                    <h4 className="new-post-tittle">ファイル名</h4>
+                                    <h4 className="new-post-tittle">ナレッジ</h4>
                                     <input type="text" placeholder="tittle" id="title" value={input.title} onChange={(e)=>{handler(e)}} />
                                     <h4 className="new-post-tittle">リンク</h4>
                                     <input type="text" placeholder="link" id="url" value={input.url}  onChange={(e)=>{handler(e)}}/>
@@ -84,7 +85,7 @@ export default function Navvar(){
                                     <h4 className="new-post-tittle">コメント</h4>
                                     <textarea id="comment" value={input.comment} style={{width:"16vw",height:"10vh",resize:"none"}} onChange={(e)=>{handler(e)}} ></textarea>
                                     <div className="new-post-area">
-                                        <button className="new-post-button" onClick={postData}>POST</button>
+                                        <button onClick={postData}>POST</button>
                                     </div>
                                 </section>
                             )
@@ -144,7 +145,10 @@ export default function Navvar(){
                             return (
                                 <section className="minor-item">
                                     <h3>🏆 ランキング</h3>
-                                    <div style={{fontSize:"150%",fontWeight:"bold",color:"gray"}}>Comming Soon?</div>
+                                    {[...Array(7)].map((e,ind)=>
+                                        <Ranking key={ind} />
+                                    )
+                                    }
                                 </section>
                             )
     

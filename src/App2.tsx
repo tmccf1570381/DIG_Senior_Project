@@ -5,8 +5,10 @@ import Card from "./components/Card";
 import React, { useEffect, useState, createContext } from "react";
 import Login from "./components/Login";
 import NewModal from "./components/NewModal";
+import { Amplify, Auth } from 'aws-amplify';
 const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
+// React hooks
 type props={
     post:
     {id:number,title:string,"post-date":string,tag:string,url:string,"user-id":number,"zamas":number,"first-name":string ,"last-name":string, review:string[]},
@@ -18,10 +20,12 @@ type props={
         URLS:string[],
         setUser:React.Dispatch<React.SetStateAction<number>>,
         user:number,
+        setCognito:React.Dispatch<React.SetStateAction<number>>,
     ]
 };
-export const NewValContext = createContext<props["prop"]>([{keyword : "", tag :"", doc :"", favorite :false, own:false, zamas: false}, ()=>{}, [], [[],[]], [], ()=>{},0]);
+export const NewValContext = createContext<props["prop"]>([{keyword : "", tag :"", doc :"", favorite :false, own:false, zamas: false}, ()=>{}, [], [[],[]], [], ()=>{}, 0, ()=>{}]);
 
+// メイン関数
 export default function App2(){
     const [post, setPost] = useState([{id:0,title:"","post-date":"",tag:"",url:"","user-id":0,"zamas":0,"first-name":"test" ,"last-name":"test",review:[""],doctype:""}]);
     const [viewArray, setViewArray] = useState(post);
@@ -29,7 +33,8 @@ export default function App2(){
     const [goodList ,setGoodList] = useState([0]);
     const [tag, setTag] = useState([[],[]]);
     const [user, setUser] = useState(0);
-    const [modify ,setModify] = useState(post[0])
+    const [modify ,setModify] = useState(post[0]);
+    const [cognito, setCognito] = useState(0);
 
     const sortFunc = (arr:any) => {
         let key = new RegExp(rule.keyword.toLocaleLowerCase());
@@ -37,7 +42,7 @@ export default function App2(){
         ? arr : arr.filter((e:any)=> key.test(e.title.toLocaleLowerCase())||key.test(e.tag.toLocaleLowerCase())||key.test(e.review[0].toLocaleLowerCase()));
         arr = rule.tag === "" ? arr : arr.filter((e:any) => e.tag === rule.tag);
         arr = rule.doc === "" ? arr : arr.filter((e:any)  => e.doctype === rule.doc);
-        arr = rule.own !== true ? arr : arr.filter((e:any) => e["user-id"] === user);
+        arr = rule.own !== true ? arr : arr.filter((e:any) => Number(e["user-id"]) === Number(user));
         arr = rule.favorite !== true ? arr : arr.filter((e:any) => goodList.indexOf(e.id)!==-1);
         setViewArray(arr);
     }
@@ -58,14 +63,31 @@ export default function App2(){
     useEffect(()=>{
         let sortArray = [...post];
         sortFunc(sortArray)
-    },[rule])
+    },[rule]);
+
+    useEffect(()=>{
+        (async()=>{
+            await fetch(fetchURL+"/params").then((e) => e.json())
+            .then(e=>{
+                Amplify.configure(e);
+                Auth.configure();
+            }).catch(() => false);
+            const data = await Auth.currentSession().then(e=>e).catch(err=>err);
+            if (data !=="No current user"){
+                setCognito(1);
+                setUser(data.accessToken.payload.username)
+            }else{
+                setCognito(0);
+                setUser(0);
+            }
+        })()
+    },[]);
 
     return(
-        <NewValContext.Provider value={[rule, setRule, goodList, tag, post.map(e=>e.url), setUser, user]}>
-            { user===0
+        <NewValContext.Provider value={[rule, setRule, goodList, tag, post.map(e=>e.url), setUser, user, setCognito]}>
+            { cognito === 0
             ?<Login/>
             :<>
-                {}
                 <NewHeader />
                 <main className="new-main">
                     <Navvar />
@@ -80,6 +102,7 @@ export default function App2(){
                 </main>
             </>
             }
+
         </NewValContext.Provider>
     )
 }

@@ -15,21 +15,28 @@
 .new-icon{
     color: #cccccc;
     font-size: 180%;
-    margin: 0 0.8vw 0 0.5vw;
+    margin: 0 0.5vw 0 0.5vw;
 }
 
 .new-icon+span{
-    width: 18px;
-    text-align: center;
-    margin-left: -37px;
-    margin-top: 9px;
     position: absolute;
-    font-size: 50%;
-    color: rgb(153, 153, 153);
+    font-size: 60%;
+    color: white;
 }
 
 .yellow{
     color: yellow;
+}
+
+.yellow+span{
+    color: rgb(153, 153, 153);
+    font-weight: bold;
+}
+
+.new-card-head>label{
+    display: flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .new-card-head>h3{

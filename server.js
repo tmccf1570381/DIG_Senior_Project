@@ -8,7 +8,6 @@ const PORT = 3456;
 
 app.listen(PORT,async () => {
   console.log(process.env.DB_DATABASE);
-    // const user = 10023;
   console.log(`Server is running ${PORT} !`);
 });
 
@@ -43,7 +42,7 @@ app.post("/users", async (req, res) => {
       .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
       res.status(200).send({...userData[0], explain, career, skill, good});
       break;
-  }
+  };
 });
 
 app.get("/posted", async (req, res) => {
@@ -118,48 +117,6 @@ app.post("/good", async (req, res) => {
   res.status(200).send(response);
 });
 
-app.post("/new-skill", async (req,res)=>{
-  await knex("skill").insert({...req.body,"skill-cd":Number(req.body["skill-cd"])});
-
-  const users = await knex.from("users")
-  .where("users.user-id","=",req.body["user-id"])
-  .leftJoin("16person","users.16id","16person.16id").select(["user-id","first-name","last-name","role","16person","supple"]);
-  const career = await knex.from("career")
-  .where("career.user-id","=",req.body["user-id"]).select(["career","date-c"]);
-  const explain = await knex.from("explain")
-  .where("explain.user-id","=",req.body["user-id"]).select(["experience","period","confidence"]);
-  const skill = await knex.from("skill")
-  .leftJoin("skilllist", "skill.skill-cd" , "skilllist.skill-cd")
-  .where("skill.user-id","=",req.body["user-id"]).select(["skill","level","date"]);
-  const good = await knex.from("good")
-  .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
-
-  res.status(200).send({...users[0], explain, career, skill, good});
-})
-
-app.delete("/skill",async (req, res)=>{
-  const id = await knex.from("skilllist").then(e => e.filter(i=> i.skill === req.body.skill).map(e=>e["skill-cd"]))
-  await knex.from("skill")
-  .where("user-id", "=", req.body["user-id"])
-  .where("date","=",req.body.date)
-  .where("skill-cd", "=", id[0]).del();
-
-  const users = await knex.from("users")
-  .where("users.user-id","=",req.body["user-id"])
-  .leftJoin("16person","users.16id","16person.16id").select(["user-id","first-name","last-name","role","16person","supple"]);
-  const career = await knex.from("career")
-  .where("career.user-id","=",req.body["user-id"]).select(["career","date-c"]);
-  const explain = await knex.from("explain")
-  .where("explain.user-id","=",req.body["user-id"]).select(["experience","period","confidence"]);
-  const skill = await knex.from("skill")
-  .leftJoin("skilllist", "skill.skill-cd" , "skilllist.skill-cd")
-  .where("skill.user-id","=",req.body["user-id"]).select(["skill","level","date"]);
-  const good = await knex.from("good")
-  .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
-
-  res.status(200).send({...users[0], explain, career, skill, good});
-});
-
 app.post("/explain", async (req,res)=>{
   await knex("explain").insert(req.body);
 
@@ -178,28 +135,6 @@ app.post("/explain", async (req,res)=>{
 
   res.status(200).send({...users[0], explain, career, skill, good});
 })
-
-app.delete("/explain",async (req, res)=>{
-  await knex.from("explain")
-  .where("user-id", "=", req.body["user-id"])
-  .where("confidence", "=", req.body["confidence"])
-  .where("experience", "=", req.body["experience"]).del();
-
-  const users = await knex.from("users")
-  .where("users.user-id","=",req.body["user-id"])
-  .leftJoin("16person","users.16id","16person.16id").select(["user-id","first-name","last-name","role","16person","supple"]);
-  const career = await knex.from("career")
-  .where("career.user-id","=",req.body["user-id"]).select(["career","date-c"]);
-  const explain = await knex.from("explain")
-  .where("explain.user-id","=",req.body["user-id"]).select(["experience","period","confidence"]);
-  const skill = await knex.from("skill")
-  .leftJoin("skilllist", "skill.skill-cd" , "skilllist.skill-cd")
-  .where("skill.user-id","=",req.body["user-id"]).select(["skill","level","date"]);
-  const good = await knex.from("good")
-  .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
-
-  res.status(200).send({...users[0], explain, career, skill, good});
-});
 
 app.post("/singnup", async (req,res) =>{
   const check = await knex.from("users").where("user-id", "=", req.body["user-id"]);
@@ -234,6 +169,14 @@ app.post("/review", async (req,res) => {
   await knex.from("review").where("id", "=", req.body["id"]).del();
   const insertObj = req.body.review.reduce((init,val)=>([...init,{id:req.body.id,comment:val}]),[])
   await knex('review').insert(insertObj);
+})
 
-  res.send({t:"ok"})
+app.get("/params", async (req, res) => {
+  res.send({Auth: {
+    region: process.env.COG_REGION,
+    userPoolId: process.env.COG_POOL,
+    userPoolWebClientId: process.env.COG_CLIENT,
+    signUpVerificationMethod: 'link', 
+    authenticationFlowType: 'USER_SRP_AUTH',
+  }});
 })

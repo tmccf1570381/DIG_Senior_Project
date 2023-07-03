@@ -1,20 +1,34 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
 import { NewValContext } from "../App2";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
+import { Auth } from 'aws-amplify';
+
 
 export default function Login(){
-    const [, , , , ,setUser] = useContext(NewValContext);
+    const [, , , , , setUser, , setCognito] = useContext(NewValContext);
     const [formValues, setFormValues] = useState({"user-id":"", password:""});
 
-    const signIn = () => {
-      (async () => {
-        let fetchData = await fetch(fetchURL+"/users", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...formValues, password:formValues.password})})
-          .then((e) => e.json()).catch((error) => {return false});
-        fetchData ? setUser(fetchData["user-id"]) : alert("Sigin in failed... please confirm your id and password");
-      })();
-    };
+    async function signIn() {
+      if(formValues["user-id"]!=="" && formValues["password"] !== ""){
+        if(!isNaN(Number(formValues["user-id"]))){
+          try {
+            const user = await Auth.signIn(String(formValues["user-id"]), formValues["password"]);
+            if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
+              await Auth.completeNewPassword(user, formValues["password"]);
+            };
+            setCognito(1);
+            setUser(user.username)
+          } 
+          catch (error) {
+            alert("IDまたはパスワードが間違っています")
+          };
+        }else{
+          alert("UserIDに数値以外の文字が入力されています")
+        }
+      }else{
+        alert("UserIDまたはパスワードが入力されていません")
+      }
+    }
 
   return (
     <>
@@ -29,8 +43,8 @@ export default function Login(){
                 minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })}/>
                 <p>PASSWORD：</p>
                 <input type="password" pattern="^[a-zA-Z0-9]+$" name="password" placeholder="password" value={formValues.password} 
-                minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} />
-                <button onClick={signIn}>LOGIN</button>
+                minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} onKeyPress={e=>{if (e.code==="Enter"){signIn()}}}/>
+                <button onClick={signIn} >LOGIN</button>
             </section>
         </article>
         </section>
