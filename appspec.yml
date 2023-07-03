@@ -4,10 +4,7 @@ files:
   - source: /
     destination: /var/www/html/
     overwrite: true
-# hooks:
-#   ApplicationStart:
-#     - location: start.sh
-#       timeout: 180
+
 hooks:
   BeforeInstall:
     - location: scripts/start_server
