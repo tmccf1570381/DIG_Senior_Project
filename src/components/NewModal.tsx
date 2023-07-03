@@ -30,7 +30,8 @@ export default function NewModal({modify ,setModify}:props){
         setModify(prev=>({...prev,[e.target.id]:e.target.value}));
     };
     const reviewUpdate = async () => {
-        await fetch(fetchURL+"/review", {method: "POST", headers: {'Content-Type': 'application/json'},
+        // await fetch(fetchURL+"/review", {method: "POST", headers: {'Content-Type': 'application/json'},
+        await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/reviews", {method: "POST", mode: "cors", headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({...modify, review:comment})}).then(e=>e.json());
         setModify(prev=>({...prev,id:0}));
         setRule(prev=>({...prev, zamas: !prev.zamas}))

@@ -20,31 +20,6 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.post("/users", async (req, res) => {
-  const userData = await knex.from("users")
-    .where("user-id", "=", req.body["user-id"])
-    .where("password", "=", req.body.password)
-    .leftJoin("16person","users.16id","16person.16id").select(["user-id","first-name","last-name","role","16person","supple"])
-
-  switch(userData.length){
-    case 0:
-      res.status(200).send(false);
-      break;
-    default:
-      const career = await knex.from("career")
-      .where("career.user-id","=",req.body["user-id"]).select(["career","date-c"]);
-      const explain = await knex.from("explain")
-      .where("explain.user-id","=",req.body["user-id"]).select(["experience","period","confidence"]);
-      const skill = await knex.from("skill")
-      .leftJoin("skilllist", "skill.skill-cd" , "skilllist.skill-cd")
-      .where("skill.user-id","=",req.body["user-id"]).select(["skill","level","date"]);
-      const good = await knex.from("good")
-      .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
-      res.status(200).send({...userData[0], explain, career, skill, good});
-      break;
-  };
-});
-
 app.get("/posted", async (req, res) => {
   const review = await knex.from("review");
   const good = await knex.from("good");
@@ -117,33 +92,27 @@ app.post("/good", async (req, res) => {
   res.status(200).send(response);
 });
 
-app.post("/explain", async (req,res)=>{
-  await knex("explain").insert(req.body);
+app.post("/review", async (req,res) => {
+  await knex.from("review").where("id", "=", req.body["id"]).del();
+  const insertObj = req.body.review.reduce((init,val)=>([...init,{id:req.body.id,comment:val}]),[])
+  await knex('review').insert(insertObj);
+});
 
-  const users = await knex.from("users")
-  .where("users.user-id","=",req.body["user-id"])
-  .leftJoin("16person","users.16id","16person.16id").select(["user-id","first-name","last-name","role","16person","supple"]);
-  const career = await knex.from("career")
-  .where("career.user-id","=",req.body["user-id"]).select(["career","date-c"]);
-  const explain = await knex.from("explain")
-  .where("explain.user-id","=",req.body["user-id"]).select(["experience","period","confidence"]);
-  const skill = await knex.from("skill")
-  .leftJoin("skilllist", "skill.skill-cd" , "skilllist.skill-cd")
-  .where("skill.user-id","=",req.body["user-id"]).select(["skill","level","date"]);
-  const good = await knex.from("good")
-  .where("good.user-id","=",req.body["user-id"]).select("id").then(e=>e.map(i=>i.id));
-
-  res.status(200).send({...users[0], explain, career, skill, good});
-})
-
-app.post("/singnup", async (req,res) =>{
-  const check = await knex.from("users").where("user-id", "=", req.body["user-id"]);
-  if(check.length > 0){
-    res.status(200).send("1");
-  }else{
-    await knex("users").insert(req.body);
-    res.status(200).send("2");
-  };
+app.get("/params", async (req, res) => {
+  res.send({Auth: {
+    region: process.env.COG_REGION,
+    userPoolId: process.env.COG_POOL,
+    userPoolWebClientId: process.env.COG_CLIENT,
+    signUpVerificationMethod: 'link', 
+    authenticationFlowType: 'USER_SRP_AUTH',
+  },
+  Storage: {
+    AWSS3: {
+        bucket: 'dig-zamas-prof',
+        region: process.env.COG_REGION,
+    }
+  }
+});
 });
 
 app.get("/aws/:id", async (req, res)=>{
@@ -165,18 +134,3 @@ app.get("/aws/:id", async (req, res)=>{
   res.status(200).send({src:arr})
 })
 
-app.post("/review", async (req,res) => {
-  await knex.from("review").where("id", "=", req.body["id"]).del();
-  const insertObj = req.body.review.reduce((init,val)=>([...init,{id:req.body.id,comment:val}]),[])
-  await knex('review').insert(insertObj);
-})
-
-app.get("/params", async (req, res) => {
-  res.send({Auth: {
-    region: process.env.COG_REGION,
-    userPoolId: process.env.COG_POOL,
-    userPoolWebClientId: process.env.COG_CLIENT,
-    signUpVerificationMethod: 'link', 
-    authenticationFlowType: 'USER_SRP_AUTH',
-  }});
-})
