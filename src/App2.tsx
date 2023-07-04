@@ -50,14 +50,14 @@ export default function App2(){
     useEffect(()=>{
         (async () => {
             // let sortArray = await fetch(fetchURL+"/posted").then((e) => e.json()).catch(() => false);
-            let sortArray = await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/posts").then((e) => e.json()).then(e=>e.body).catch(() => false);
+            let sortArray = await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/posts").then((e) => e.json()).catch(() => false);
             const tagArray = sortArray.map((e:props["post"])=>e.tag);
             const tags = [...new Set(tagArray)].reduce((init,val)=>{return {...init as {}, [String(val)]:tagArray.filter((i:any)=>i===val).length}}, {})
             setTag([Object.keys(tags as {}) as [],Object.values(tags as {})]);
             setPost(sortArray);
             sortFunc(sortArray);
             // const zamas:any = await fetch(fetchURL+`/good/${user}`).then((e) => e.json()).catch(() => false);
-            const zamas:any = await fetch(`https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/good/user-id?user-id=${user}`).then((e) => e.json()).catch(() => false);
+            const zamas:any = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/good/user-id?user-id=${user}`).then((e) => e.json()).catch(() => false);
             setGoodList(zamas.favorite);
         })();
     },[rule.zamas,user]);
@@ -70,7 +70,7 @@ export default function App2(){
     useEffect(()=>{
         (async()=>{
             // await fetch(fetchURL+"/params").then((e) => e.json())
-            await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/params").then((e) => e.json())
+            await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/params").then((e) => e.json())
             .then(e=>{
                 Amplify.configure(e);
                 Auth.configure();

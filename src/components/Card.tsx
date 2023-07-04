@@ -18,14 +18,14 @@ export default function Card({arr, setModify}:props){
 
     const ZAMAS = async (e:any) => {
         // await fetch(fetchURL+"/good", {method: "POST", headers: {'Content-Type': 'application/json'},
-        await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/good/", {method: "POST", mode: 'cors', headers: {'Content-Type': 'application/json'},
+        await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/goods", {method: "POST", mode: 'cors', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"id": Number(e.currentTarget.id), "user-id":user})}).then(e=>e.json());
         setRule((prev:any)=>({...rule, zamas:!rule.zamas}));
     };
 
     const deletePost = async () => {
         // await fetch(fetchURL+"/posted", {method: "DELETE", headers: {'Content-Type': 'application/json'},
-        await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/posts/", {method: "DELETE", mode: 'cors', headers: {'Content-Type': 'application/json'},
+        await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/posts", {method: "DELETE", mode: 'cors', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({...arr})}).then(e=>e.json()); 
         setRule((prev:any)=>({...rule, zamas:!rule.zamas}));
     };

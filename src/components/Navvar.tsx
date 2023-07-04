@@ -25,7 +25,7 @@ export default function Navvar(){
                     const {comment, ...posted} = {...input,"user-id":user,
                     "post-date": `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`};
                     // await fetch(fetchURL+"/posted", {method: "POST", headers: {'Content-Type': 'application/json'},
-                    await fetch("https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/posts/", {method: "POST", mode: 'cors',headers: {"Accept":"*/*",'Content-Type': 'application/json'},
+                    await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/posts", {method: "POST", mode: 'cors',headers: {"Accept":"*/*",'Content-Type': 'application/json'},
                     body: JSON.stringify({posted, comment})}).then(e=>e.json()).then(e=>console.log(e));
                     setRule({...rule, zamas:!rule.zamas});
                     setInput({title:"", tag:"", url:"", doctype:"", comment:"" });

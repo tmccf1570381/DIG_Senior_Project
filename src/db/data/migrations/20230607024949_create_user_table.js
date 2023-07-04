@@ -7,7 +7,7 @@ exports.up = async function(knex) {
         table.integer("user-id",32).primary();
         table.string("first-name",32).notNullable();
         table.string("last-name",32).notNullable();
-        table.string("password").notNullable();
+        table.string("mail").notNullable();
         table.integer("16id",2);
         table.string("role",32);
     })

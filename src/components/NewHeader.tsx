@@ -12,7 +12,7 @@ export default function NewHeader(){
     useEffect(()=>{
         (async ()=>{
             // const res = await fetch(fetchURL+`/aws/${user}`).then(e=>e.json());
-            const res = await fetch(`https://kwx5tvv2q1.execute-api.us-east-1.amazonaws.com/dev/s3/user-id?user-id=${user}`).then(e=>e.json());
+            const res = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/s3/user-id?user-id=${user}`).then(e=>e.json());
             res.src && setSrc(res.src);
         })();
     },[]);
