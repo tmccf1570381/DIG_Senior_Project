@@ -11,7 +11,7 @@
     cursor: unset;
     width: 40vw;
     height: 35vh;
-    padding: 2rem;
+    padding: 4vh 2vw;
     background-color: white;
     box-shadow: 2px 12px 17px -7px #383838bb;
     border-radius: 15px;
@@ -23,21 +23,21 @@
     border-right: 1px solid gray;
     display: flex;
     align-items: center;
-    font-size: 150%;
+    font-size: 4vmin;
     letter-spacing: 0.2rem;
 }
 
 .formContainer>article>section{
     display: flex;
     flex-direction: column;
-    padding: 0 0 0 2rem;
+    padding: 0 0 0 2vw;
     width: 70%;
     justify-content: space-evenly;
 }
 
 .formContainer>article>section>p{
     margin: 1vh 0 0 0 ;
-    font-size: 85%;
+    font-size: 2vmin;
 }
 
 .formContainer>article>section>input {
@@ -47,6 +47,7 @@
     height: 5.4vh;
     padding: 0.3vh 1vw;
     border-radius: 4px;
+    font-size: 2vmin;
 }
   
 .formContainer>article>section>input:focus {
@@ -60,7 +61,7 @@
     margin-top: 1em;
     border: none;
     border-radius: 5px;
-    font-size: 90%;
+    font-size: 2vmin;
     cursor: pointer;
     transition: all 0.3s;
 }
