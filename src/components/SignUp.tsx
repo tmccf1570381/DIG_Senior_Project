@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Auth } from 'aws-amplify';
+import Loading from "./Loading";
 
 const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispatch<React.SetStateAction<number>>, createAccount:number}) => {
   const [inputData, setInputData] = useState({"first-name": "", "last-name": "",  password: "", mail: ""});
   const [token, setToken] = useState({id:"",token:""});
+  const [load, setLoad] = useState(false);
   const key = new RegExp("[A-Za-z0-9@_-]");
 
+  useEffect(()=>{
+    setLoad(false);
+  },[]);
+
   const SignUp = async () => {
+    setLoad(true);
     if(inputData.mail!=="" && inputData.password!=="" && inputData["first-name"]!=="" && inputData["last-name"]!==""){
       const {password, ...sendArr} = inputData;
       const newID = await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/users", {method: "POST", mode: 'cors', headers: {'Content-Type': 'application/json'},
@@ -27,27 +34,27 @@ const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispat
       }
     }else{
         alert("入力されていない項目があります")
-    }  
+    }  ;
+    setLoad(false);
   };
 
   const Vertificate = async () => {
+    setLoad(true);
     const res = await Auth.confirmSignUp(token.id, token.token).catch(e=>e);
     switch(res){
       case "SUCCESS":
-
-      
         setCreateAccount(0);
         break
       default:
         alert("認証コードが間違っています");
         break
-    }
-  }
-
+    };
+    setLoad(false);
+  };
 
   const handler = (e:any) => {
     setInputData({...inputData,[e.target.name]: e.target.value});
-  }
+  };
 
   return (
       <>
@@ -60,6 +67,7 @@ const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispat
               {createAccount === 1 
               ?
               <>
+              {load && <Loading/>}
                <p>FIRST NAME：</p>
                       <input type="text" name="first-name" placeholder="first name" value={inputData["first-name"]}
                       onChange={(e) => setInputData({...inputData,[e.target.name]: e.target.value})}/>
@@ -79,6 +87,8 @@ const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispat
                       </div>               
               </>
               : 
+              <>
+              {load && <Loading/>}
               <div className="confirmbox">
                 <div style={{fontSize:"2.2vmin"}}>
                   <h3 style={{marginBottom:"0"}}>ご登録頂いたメールアドレスに</h3>
@@ -90,6 +100,7 @@ const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispat
                   <button onClick={Vertificate}>confirm</button>
                 </div>
               </div>
+              </>
               } 
                           
               </section>

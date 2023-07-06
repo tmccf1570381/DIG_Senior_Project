@@ -1,0 +1,50 @@
+.LoadingBack{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.loader {
+    font-size: 18px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+
+    animation: mulShdSpin 1.1s infinite ease;
+    transform: translateZ(0);
+}
+
+@keyframes mulShdSpin {
+    0%,
+    100% {
+        box-shadow: 0em -2.6em 0em 0em #447566, 1.8em -1.8em 0 0em #44756640, 2.5em 0em 0 0em #44756640, 1.75em 1.75em 0 0em #44756640, 0em 2.5em 0 0em #44756640, -1.8em 1.8em 0 0em #44756640, -2.6em 0em 0 0em #447566b6, -1.8em -1.8em 0 0em #447566e1;
+    }
+    12.5% {
+        box-shadow: 0em -2.6em 0em 0em #447566e1, 1.8em -1.8em 0 0em #447566, 2.5em 0em 0 0em #44756640, 1.75em 1.75em 0 0em #44756640, 0em 2.5em 0 0em #44756640, -1.8em 1.8em 0 0em #44756640, -2.6em 0em 0 0em #44756640, -1.8em -1.8em 0 0em #447566b6;
+    }
+    25% {
+        box-shadow: 0em -2.6em 0em 0em #447566b6, 1.8em -1.8em 0 0em #447566e1, 2.5em 0em 0 0em #447566, 1.75em 1.75em 0 0em #44756640, 0em 2.5em 0 0em #44756640, -1.8em 1.8em 0 0em #44756640, -2.6em 0em 0 0em #44756640, -1.8em -1.8em 0 0em #44756640;
+    }
+    37.5% {
+        box-shadow: 0em -2.6em 0em 0em #44756640, 1.8em -1.8em 0 0em #447566b6, 2.5em 0em 0 0em #447566e1, 1.75em 1.75em 0 0em #447566, 0em 2.5em 0 0em #44756640, -1.8em 1.8em 0 0em #44756640, -2.6em 0em 0 0em #44756640, -1.8em -1.8em 0 0em #44756640;
+    }
+    50% {
+        box-shadow: 0em -2.6em 0em 0em #44756640, 1.8em -1.8em 0 0em #44756640, 2.5em 0em 0 0em #447566b6, 1.75em 1.75em 0 0em #447566e1, 0em 2.5em 0 0em #447566, -1.8em 1.8em 0 0em #44756640, -2.6em 0em 0 0em #44756640, -1.8em -1.8em 0 0em #44756640;
+    }
+    62.5% {
+        box-shadow: 0em -2.6em 0em 0em #44756640, 1.8em -1.8em 0 0em #44756640, 2.5em 0em 0 0em #44756640, 1.75em 1.75em 0 0em #447566b6, 0em 2.5em 0 0em #447566e1, -1.8em 1.8em 0 0em #447566, -2.6em 0em 0 0em #44756640, -1.8em -1.8em 0 0em #44756640;
+    }
+    75% {
+        box-shadow: 0em -2.6em 0em 0em #44756640, 1.8em -1.8em 0 0em #44756640, 2.5em 0em 0 0em #44756640, 1.75em 1.75em 0 0em #44756640, 0em 2.5em 0 0em #447566b6, -1.8em 1.8em 0 0em #447566e1, -2.6em 0em 0 0em #447566, -1.8em -1.8em 0 0em #44756640;
+    }
+    87.5% {
+        box-shadow: 0em -2.6em 0em 0em #44756640, 1.8em -1.8em 0 0em #44756640, 2.5em 0em 0 0em #44756640, 1.75em 1.75em 0 0em #44756640, 0em 2.5em 0 0em #44756640, -1.8em 1.8em 0 0em #447566b6, -2.6em 0em 0 0em #447566e1, -1.8em -1.8em 0 0em #447566;
+    }
+}

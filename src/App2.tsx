@@ -6,6 +6,7 @@ import React, { useEffect, useState, createContext } from "react";
 import Login from "./components/Login";
 import NewModal from "./components/NewModal";
 import { Amplify, Auth } from 'aws-amplify';
+import Loading from "./components/Loading";
 // const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 // React hooks
@@ -35,6 +36,8 @@ export default function App2(){
     const [user, setUser] = useState(0);
     const [modify ,setModify] = useState(post[0]);
     const [cognito, setCognito] = useState(0);
+    const [load, setLoad] = useState(false);
+
 
     const sortFunc = (arr:any) => {
         let key = new RegExp(rule.keyword.toLocaleLowerCase());
@@ -91,6 +94,7 @@ export default function App2(){
             { cognito === 0
             ?<Login/>
             :<>
+                {load && <Loading />}
                 <NewHeader />
                 <main className="new-main">
                     <Navvar />
@@ -98,7 +102,7 @@ export default function App2(){
                         {viewArray.map((e) => 
                             <React.Fragment key={e.id} >
                                 {modify.id !== 0 && <NewModal modify={modify} setModify={setModify}/>}
-                                <Card key={e.id} arr={e} setModify={setModify}/>
+                                <Card key={e.id} arr={e} setModify={setModify} setLoad={setLoad}/>
                             </React.Fragment>
                         )}
                     </section>

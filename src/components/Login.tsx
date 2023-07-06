@@ -1,16 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import SignUp from "./SignUp";
 import { NewValContext } from "../App2";
 import { Auth } from 'aws-amplify';
-
+import Loading from "./Loading";
 
 export default function Login(){
     const [, , , , , setUser, , setCognito] = useContext(NewValContext);
     const [formValues, setFormValues] = useState({"user-id":"", password:""});
-    const [createAccount , setCreateAccount] = useState(0)
+    const [createAccount , setCreateAccount] = useState(0);
+    const [load, setLoad] = useState(false);
+
+    useEffect(()=>{
+      setLoad(false);
+    },[])
 
     async function signIn() {
+      setLoad(true);
       if(formValues["user-id"]!=="" && formValues["password"] !== ""){
         if(!isNaN(Number(formValues["user-id"]))){
           try {
@@ -30,12 +36,16 @@ export default function Login(){
       }else{
         alert("UserIDまたはパスワードが入力されていません")
       }
+      setLoad(false);
     }
 
   return (
     <>
     {createAccount === 0
-      ?<section className="formContainer">
+      ?
+      <>
+      {load && <Loading />}
+      <section className="formContainer">
         <article>
             <nav>
                 <h1>KMT ZAMAS</h1>
@@ -52,7 +62,10 @@ export default function Login(){
             </section>
         </article>
       </section>
-      : <SignUp setCreateAccount={setCreateAccount} createAccount={createAccount}/>
+      </>
+      : <>
+        <SignUp setCreateAccount={setCreateAccount} createAccount={createAccount}/>
+        </>
   }
     </>
   );
