@@ -4,7 +4,7 @@ import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar } from "@for
 import { NewValContext } from "../App2";
 import Ranking from "./Ranking";
 import { useContext, useState } from "react";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
+// const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 export default function Navvar(){

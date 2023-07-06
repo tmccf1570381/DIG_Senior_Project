@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
+import SignUp from "./SignUp";
 import { NewValContext } from "../App2";
 import { Auth } from 'aws-amplify';
 
@@ -7,6 +8,7 @@ import { Auth } from 'aws-amplify';
 export default function Login(){
     const [, , , , , setUser, , setCognito] = useContext(NewValContext);
     const [formValues, setFormValues] = useState({"user-id":"", password:""});
+    const [createAccount , setCreateAccount] = useState(0)
 
     async function signIn() {
       if(formValues["user-id"]!=="" && formValues["password"] !== ""){
@@ -32,7 +34,8 @@ export default function Login(){
 
   return (
     <>
-        <section className="formContainer">
+    {createAccount === 0
+      ?<section className="formContainer">
         <article>
             <nav>
                 <h1>KMT ZAMAS</h1>
@@ -45,9 +48,12 @@ export default function Login(){
                 <input type="password" pattern="^[a-zA-Z0-9]+$" name="password" placeholder="password" value={formValues.password} 
                 minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} onKeyPress={e=>{if (e.code==="Enter"){signIn()}}}/>
                 <button onClick={signIn} >LOGIN</button>
+                <div className="signup" onClick={()=>setCreateAccount(1)}><span>~create NEW account~</span></div>
             </section>
         </article>
-        </section>
+      </section>
+      : <SignUp setCreateAccount={setCreateAccount} createAccount={createAccount}/>
+  }
     </>
   );
 };

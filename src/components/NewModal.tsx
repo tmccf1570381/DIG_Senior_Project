@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import "./NewModal.css";
 import { NewValContext } from "../App2";
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
+// const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 type props={
@@ -26,7 +26,7 @@ export default function NewModal({modify ,setModify}:props){
         replace[Number(e.target.id)]=e.target.value;
         setComment(replace);
     };
-    
+
     const handler2 = (e:any) =>{
         setModify(prev=>({...prev,[e.target.id]:e.target.value}));
     };
