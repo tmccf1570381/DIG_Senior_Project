@@ -93,8 +93,8 @@ export default function App2(){
         const s3 = new S3Client({
             region: 'us-east-1',
             credentials: {
-                accessKeyId: 'AKIA25NICGAUOIATSRLE',
-                secretAccessKey:'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'
+                accessKeyId: process.env.S3_KEY as string,
+                secretAccessKey:process.env.S3_SKEY as string
             }
       });
       s3.send(
