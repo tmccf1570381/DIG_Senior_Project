@@ -1,6 +1,6 @@
 import "./Navvar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar, faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { NewValContext } from "../App2";
 import Ranking from "./Ranking";
 import { useContext, useState } from "react";
@@ -133,7 +133,7 @@ export default function Navvar(){
                                     <div key={ind} className="minor-item-row">
                                         <label className="select-tag">
                                             <input type="radio" name="tagsort" value={e} onClick={e=>setRule({...rule,tag:e.currentTarget.value})}/>
-                                            <span>#{e}</span>
+                                            <span><FontAwesomeIcon className="new-icon-nav" icon={faHashtag}/> {e}</span>
                                             <span className="minor-item-row-num">{tag[1][ind]}</span>
                                         </label>
                                     </div>

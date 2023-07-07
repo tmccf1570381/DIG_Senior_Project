@@ -53,10 +53,10 @@ export default function Login(){
             <section>
                 <p>USER ID：</p>
                 <input type="text" pattern="^[0-9]+$" name="user-id" placeholder="user id  (※number only)" value={formValues["user-id"]} 
-                minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })}/>
+                onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })}/>
                 <p>PASSWORD：</p>
                 <input type="password" pattern="^[a-zA-Z0-9]+$" name="password" placeholder="password" value={formValues.password} 
-                minLength={4} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} onKeyPress={e=>{if (e.code==="Enter"){signIn()}}}/>
+                onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} onKeyPress={e=>e.code==="Enter" && signIn()}/>
                 <button onClick={signIn} >LOGIN</button>
                 <div className="signup" onClick={()=>setCreateAccount(1)}><span>~create NEW account~</span></div>
             </section>

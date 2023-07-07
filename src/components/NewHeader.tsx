@@ -3,19 +3,10 @@ import "./NewHeader.css"
 import SearchBox from "./SearchBox"
 import { NewValContext } from "../App2";
 import { Auth, Storage } from 'aws-amplify';
-const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
-export default function NewHeader(){
-    const [src, setSrc] = useState("");
+export default function NewHeader({src}:{src:string}){
     const [,,,,, setUser, user, setCognito] = useContext(NewValContext);
-
-    useEffect(()=>{
-        (async ()=>{
-            // const res = await fetch(fetchURL+`/aws/${user}`).then(e=>e.json());
-            const res = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/s3/user-id?user-id=${user}`).then(e=>e.json());
-            res.src && setSrc(res.src);
-        })();
-    },[]);
+    const [open, setOpen] = useState(false)
 
     async function signOut() {
         setUser(0);
@@ -24,7 +15,7 @@ export default function NewHeader(){
             setCognito(0);
             alert("ログアウトしました")
         }catch (error) {
-            setCognito(2);
+            alert("エラーが発生しました")
         }
     };
 
@@ -38,14 +29,21 @@ export default function NewHeader(){
         <>
             <section className="new-header">
                 <div>
-                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%",cursor:"pointer"}} onClick={signOut}/>
+                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%",cursor:"pointer"}} />
                 </div>
                 <SearchBox />
-                <figure className="new-prof">
+
+                <figure className="new-prof" >
+                    <label onClick={()=>{setOpen(prev => !prev)}} style={{cursor:"pointer"}}>
                     {src !== "" 
                     ? <img src={`data:image/png;base64,${src}`} alt="profile" onClick={uploadPict}/>
                     : <img src="./systemImages/else.png" alt="profile" />}
+                    </label>
                 </figure>
+                <nav className={open ? "nav-head nav-head-off" : "nav-head"}>
+                        <li onClick={signOut}>Logout</li>
+                        <li onClick={()=>setCognito(prev => {return prev === 1 ? 2 : 1})}>Setting</li>
+                </nav>
             </section>
         </>
     );

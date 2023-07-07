@@ -30,6 +30,15 @@ main{
   place-items: end center;
 }
 
+.new-profile-area{
+  position: absolute;
+  left: 26vw;
+  width: 74vw;
+  height: 89vh;
+  overflow-y: scroll;
+  display: flex;
+}
+
 figure{
   width: 100%;
   height: 40%;
@@ -41,4 +50,153 @@ figure{
 
 img{
   max-block-size: 75%;
+}
+
+.profile-left{
+  height: 100%;
+  width: 18.5vw;
+  padding-left: 1vw;
+}
+
+.profile-left>figure{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-top: 2.5vmin;
+  height: 18.5vw;
+}
+
+.profile-left>figure>img{
+  max-width: 90%;
+  border-radius: 50%;
+}
+
+.profile-right{
+  height: 100%;
+  /* width: 51.5vw; */
+  width: 45vw;
+  padding:0 2vw;
+}
+
+.profile-right>article>h3{
+  box-sizing: border-box;
+  border-radius: 5px 5px 0 0;
+  border: 2px solid #68b39d;
+  border-bottom: none;
+  padding: 1vmin;
+  font-size: 2.5vmin;
+  margin-bottom: 0%;
+  color: rgb(55, 55, 55);
+  background-color: #D5ECC2;
+  display: inline-flex;
+}
+
+.profile-right>article>div{
+  margin: 0%;
+  box-sizing: border-box;
+  border-radius: 0 5px 5px 5px;
+  border: 2px solid #68b39d;
+  padding:  0 2vmin 4vmin 2vmin;
+  text-align: center;
+}
+
+.profile-name-area{
+  display: flex;
+}
+
+.profile-name-area>div{
+  width: 50%;
+}
+
+.profile-right p{
+  font-size: 2vmin;
+  margin: 3vmin 0  1vmin 0;
+  text-align: left;
+  margin-left: 1.5vw;
+}
+
+.profile-right input{
+  height: 4vmin;
+  font-size: 2.8vmin;
+  padding: 0 1.5vmin;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(228, 228, 228);
+  width: 90%;
+}
+
+.profile-name-area>div>input{
+  width: 80%;
+}
+
+.profile-photo-icon{
+  cursor: pointer;
+  position: absolute;
+  font-size: 2.5vw;
+  padding: 0.5vmin;
+  background-color: aliceblue;
+  color:rgb(55, 55, 55);
+  margin-left: 11vw;
+  margin-top: 10vw;
+  border: 3px solid #68b39d;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.profile-left>div{
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-left>div>button{
+  width: 5vw;
+  height: 4vh;
+  border: none;
+  font-size: 3vmin;
+  color: #549d87; 
+  cursor: pointer;
+}
+
+.personality-area{
+  margin-top: 1.5vh;
+  height: 12vh;
+  margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.personality-area>img{
+  max-height: 100%;
+  border: 2px solid rgb(180, 180, 180);
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.personality-area input[type="checkbox"]:checked  ~ img{
+  display: none;
+}
+
+.personality-area input[type="checkbox"]:checked  ~ label{
+  transform: rotateY(180deg);
+}
+
+.persona-icon{
+  margin: 0 0.3vw;
+}
+
+.icon-green{
+  border: 5px solid #549d87 !important;
+}
+
+.profile-update{
+  background-color: white;
+  border: 2px solid #68b39d;
+  font-size: 2.5vmin;
+  padding: 0.3vmin;
+  border-radius: 5px;
+  margin-right:0.7vw ;
+  margin-top: 0.1vh;
+  cursor: pointer;
 }

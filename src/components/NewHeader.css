@@ -45,18 +45,80 @@
 
 .new-prof{
     height: 11vh;
-    width: 11vh;
+    width:11vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: 2vw;
+    right: 1.1vw;
 }
 
-.new-prof>img{
-    max-width: 100%;
+.new-prof>label>img{
+    width: 8.5vh;
+    height: 8.5vh;
     object-fit: cover;
     border-radius: 50%;
     box-sizing: border-box;
     border: 0.35vmin white solid;
 }
+
+.nav-head{
+    position: absolute;
+    display: flex;
+    right:7.5vw;
+    height: 100%;
+    align-items: center;
+    animation-name: sample-animation;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes sample-animation {
+    0%{
+        width: 0%;
+        overflow: hidden;
+    }
+    100%{
+        width: 29vmin;
+        overflow: hidden;
+    }
+}
+
+.nav-head-off{
+    animation-name: close-animation;
+    animation-fill-mode: forwards;
+    animation-name: close-animation;
+}
+
+@keyframes close-animation {
+    0%{
+        width: 29vmin;
+        overflow: hidden;
+    }
+    100%{
+        width: 0%;
+        overflow: hidden;
+    }
+}
+
+.nav-head>li{
+    cursor: pointer;
+    list-style: none;
+    padding: 1vh 1.5vw;
+    font-size: 2.5vmin;
+    box-sizing: border-box;
+    border-left: 1px solid white;
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.nav-head>li:hover{
+    text-decoration: none;
+}
+
+.nav-head>li:active{
+    text-decoration: underline;
+}
+
+
