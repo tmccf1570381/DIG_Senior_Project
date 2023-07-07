@@ -9,6 +9,7 @@ import { Amplify, Auth } from 'aws-amplify';
 import Loading from "./components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate, faAnglesLeft, faCamera } from "@fortawesome/free-solid-svg-icons";
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 // const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 // UseContext用型定義
@@ -24,9 +25,11 @@ type props={
         setUser:React.Dispatch<React.SetStateAction<number>>,
         user:number,
         setCognito:React.Dispatch<React.SetStateAction<number>>,
+        setSrc:React.Dispatch<React.SetStateAction<string>>,
+        setUserInfo:React.Dispatch<React.SetStateAction<{"user-id": number, "first-name": string,"last-name": string,"mail": string,"16id": number,"role": string}>>,
     ]
 };
-export const NewValContext = createContext<props["prop"]>([{keyword : "", tag :"", doc :"", favorite :false, own:false, zamas: false}, ()=>{}, [], [[],[]], [], ()=>{}, 0, ()=>{}]);
+export const NewValContext = createContext<props["prop"]>([{keyword : "", tag :"", doc :"", favorite :false, own:false, zamas: false}, ()=>{}, [], [[],[]], [], ()=>{}, 0, ()=>{}, ()=>{}, ()=>{}]);
 
 // メイン関数
 export default function App2(){
@@ -42,6 +45,7 @@ export default function App2(){
     const [src, setSrc] = useState("");
     const [userInfo, setUserInfo] = useState({"user-id": 0, "first-name": "","last-name": "","mail": "","16id": 0,"role": ""});
     const [newPass, setNewPass] = useState(["",""]);
+    const [upload, setUpload] = useState()
     
     // ナレッジソート関数
     const sortFunc = (arr:any) => {
@@ -85,6 +89,23 @@ export default function App2(){
         setLoad(false);
     }
 
+    const uploadPict = async () => {
+        const s3 = new S3Client({
+            region: 'us-east-1',
+            credentials: {
+                accessKeyId: 'AKIA25NICGAUOIATSRLE',
+                secretAccessKey:'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'
+            }
+      });
+      s3.send(
+        new PutObjectCommand({
+             Bucket: 'dig-zamas-prof',
+             Key: '10046.png',
+             Body: upload,
+             ContentType: 'image/png',
+        })).catch(e=>e);
+    };
+
     //データ取得
     useEffect(()=>{
         (async () => {
@@ -118,7 +139,6 @@ export default function App2(){
             }).catch(() => false);
             const data = await Auth.currentSession().then(e=>e).catch(err=>err);
             if (data !=="No current user"){
-                setSrc("");
                 const res = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/s3/user-id?user-id=${data.accessToken.payload.username}`).then(e=>e.json());
                 res.src && setSrc(res.src);
                 const updates = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/updates/user-id?user-id=${data.accessToken.payload.username}`).then(e=>e.json());
@@ -129,12 +149,11 @@ export default function App2(){
                 setCognito(0);
                 setUser(0);
             };
-            // const res = await fetch(fetchURL+`/aws/${user}`).then(e=>e.json());
         })();
-    },[user]);
+    },[]);
 
     return(
-        <NewValContext.Provider value={[rule, setRule, goodList, tag, post.map(e=>e.url), setUser, user, setCognito]}>
+        <NewValContext.Provider value={[rule, setRule, goodList, tag, post.map(e=>e.url), setUser, user, setCognito, setSrc, setUserInfo]}>
             { cognito === 0
             ?<Login/>
             :<>
@@ -142,7 +161,7 @@ export default function App2(){
                 <NewHeader src={src}/>
                 <main className="new-main">
                     <Navvar />
-                    {cognito === 2 &&
+                    {cognito === 1 &&
                     <section className="new-content-area">
                         {viewArray.map((e) => 
                             <React.Fragment key={e.id} >
@@ -152,15 +171,17 @@ export default function App2(){
                         )}
                     </section>
                     }
-                    {cognito === 1 &&
+                    {cognito === 2 &&
                     <section className="new-profile-area">
                         <section className="profile-left">
                             <figure>
                             {src !== "" 
                                 ? <img src={`data:image/png;base64,${src}`} alt="profile"/>
                                 : <img src="./systemImages/else.png" alt="profile" />}
-                                <FontAwesomeIcon className="profile-photo-icon" icon={faCamera} />
+                                <input type="file" id="files" accept="image/png" style={{display:"none"}} onChange={(e:any)=> setUpload(e.target.files[0])}/>
+                                <label className="profile-photo-icon" htmlFor="files"><FontAwesomeIcon icon={faCamera} /></label>
                             </figure>
+                            <button onClick={uploadPict}>test</button>
                         </section>
                         <section className="profile-right">
                             <article>
@@ -183,10 +204,9 @@ export default function App2(){
                                         {userInfo["16id"]
                                         ? <img id={"#"+String(userInfo["16id"])} src={`./systemImages/${userInfo["16id"]}.png`} alt="persona" />
                                         : <img src="./systemImages/else.png" alt="profile" />}
-
                                         <input type="checkbox" id="check_input" defaultChecked style={{display:"none"}}/>
                                         <label id="check_btn" htmlFor="check_input">
-                                            <FontAwesomeIcon style={{padding:"0.5vw", margin:"0 0.5vw",borderRadius:"5px",backgroundColor:"gray"}} icon={faAnglesLeft} />
+                                            <FontAwesomeIcon style={{padding:"0.5vw", margin:"0 0.5vw",borderRadius:"5px",backgroundColor:"gray",color:"white"}} icon={faAnglesLeft} />
                                         </label>
                                         {[...Array(16)].map((e,ind)=>ind+1).map(e => {
                                                 return <img key={"#"+String(e)} id={String(e)} src={`./systemImages/${String(e)}.png`} alt="persona" 

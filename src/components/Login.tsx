@@ -6,7 +6,7 @@ import { Auth } from 'aws-amplify';
 import Loading from "./Loading";
 
 export default function Login(){
-    const [, , , , , setUser, , setCognito] = useContext(NewValContext);
+    const [, , , , , setUser, , setCognito, setSrc, setUserInfo] = useContext(NewValContext);
     const [formValues, setFormValues] = useState({"user-id":"", password:""});
     const [createAccount , setCreateAccount] = useState(0);
     const [load, setLoad] = useState(false);
@@ -24,6 +24,10 @@ export default function Login(){
             if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
               await Auth.completeNewPassword(user, formValues["password"]);
             };
+            const res = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/s3/user-id?user-id=${user.username}`).then(e=>e.json());
+            const updates = await fetch(`https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/updates/user-id?user-id=${user.username}`).then(e=>e.json());
+            res.src && setSrc(res.src);
+            setUserInfo(updates[0]);
             setCognito(1);
             setUser(user.username)
           } 
@@ -48,7 +52,7 @@ export default function Login(){
       <section className="formContainer">
         <article>
             <nav>
-                <h1>KMT ZAMAS</h1>
+                <h1>Zamas</h1>
             </nav>
             <section>
                 <p>USER ID：</p>

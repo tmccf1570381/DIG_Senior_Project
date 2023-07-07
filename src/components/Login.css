@@ -48,6 +48,7 @@
     padding: 0.3vh 1vw;
     border-radius: 4px;
     font-size: 2vmin;
+    box-shadow: 0.05rem 0.05rem 0.05rem rgba(128, 128, 128, 0.746);
 }
   
 .formContainer>article>section>input:focus {
@@ -64,6 +65,7 @@
     font-size: 2vmin;
     cursor: pointer;
     transition: all 0.3s;
+    box-shadow: 0.1rem 0.2rem 0.2rem rgba(128, 128, 128, 0.746);
 }
   
 .formContainer>article>section>button:hover {
@@ -132,6 +134,7 @@
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
+    box-shadow: 0.1rem 0.2rem 0.2rem rgba(128, 128, 128, 0.746);
 }
 
 .formContainer>article>section>.signup2>button:first-child{
@@ -177,6 +180,7 @@
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
+    box-shadow: 0.1rem 0.2rem 0.2rem rgba(128, 128, 128, 0.746);
 }
 
 .confirmbox button:hover {

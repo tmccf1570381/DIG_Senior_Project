@@ -61,12 +61,15 @@
     height: 5vh;
     border: none;
     border-radius: 5px;
+    box-shadow: 0.05rem 0.05rem 0.05rem rgba(128, 128, 128, 0.746);
+
 }
 
 .minor-item>textarea{
     padding: 1vh 1vw;
     border: none;
     border-radius: 5px;
+    box-shadow: 0.05rem 0.05rem 0.05rem rgba(128, 128, 128, 0.746);
 }
 
 .minor-item>select{
@@ -76,6 +79,7 @@
     border-radius: 5px;
     text-align: left;
     padding: 0 1vw;
+    box-shadow: 0.05rem 0.05rem 0.05rem rgba(128, 128, 128, 0.746);
 }
 
 .new-post-tittle{
@@ -129,18 +133,18 @@
     width: 10vmin;    
     font-size: 2vmin;
     border: none;
-    border: 4px solid;
+    border: 0.4vmin solid;
     overflow: hidden;
     background-color: #FFD3B4;
     border-color: #909090;
     color: #909090;
-    box-shadow: 0 0.1em 0 #ffffff;
+    box-shadow: 0.1rem 0.1rem 0.2rem 0.1rem #b1b1b1cd;
     font-weight: bold;
 }
 
 .new-post-area>button:hover {
     opacity: .9;
-    box-shadow: 0 0.1em 0 #ffffff;
+    box-shadow: 0 0.1rem 0 #ffffff;
 }
 
 .new-post-area>button:active {
