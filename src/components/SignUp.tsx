@@ -61,7 +61,7 @@ const SignUp = ({setCreateAccount, createAccount}:{setCreateAccount:React.Dispat
         <section className="formContainer container-orange">
           <article>
               <nav>
-                  <h1>SingUp Form</h1>
+                  <h1>SignUp Form</h1>
               </nav>
               <section>
               {createAccount === 1 

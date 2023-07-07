@@ -40,7 +40,8 @@ export default function App2(){
     const [cognito, setCognito] = useState(0);
     const [load, setLoad] = useState(false);
     const [src, setSrc] = useState("");
-    const [userInfo, setUserInfo] = useState({"user-id": 0, "first-name": "","last-name": "","mail": "","16id": 0,"role": ""})
+    const [userInfo, setUserInfo] = useState({"user-id": 0, "first-name": "","last-name": "","mail": "","16id": 0,"role": ""});
+    const [newPass, setNewPass] = useState(["",""]);
     
     // ナレッジソート関数
     const sortFunc = (arr:any) => {
@@ -59,8 +60,29 @@ export default function App2(){
     }
 
     const UpdataUserInfo = async () => {
-        const update = await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/goods", {method: "POST", mode: 'cors', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(userInfo)}).then(e=>e.json());
+        setLoad(true);
+        try{
+            await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/updates", {method: "POST", mode: 'cors', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userInfo)});
+            alert("ユーザー情報が更新されました")
+        }catch(error){
+            alert(error)
+        }
+        setLoad(false);
+    }
+
+    const ChangePassword = async () => {
+        setLoad(true);
+        const user = await Auth.currentAuthenticatedUser().then(e=>e).catch(err=>err);
+        console.log(user);
+        try{
+            await Auth.changePassword(user, newPass[0], newPass[1]);
+            alert(`パスワードが${newPass[1]}に変更されました`)
+            setNewPass(["",""]);
+        }catch(error){
+            alert(error)
+        }
+        setLoad(false);
     }
 
     //データ取得
@@ -142,7 +164,7 @@ export default function App2(){
                         </section>
                         <section className="profile-right">
                             <article>
-                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} />基本情報の更新</h3>
+                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} onClick={UpdataUserInfo} />基本情報の更新</h3>
                                 <div>
                                     <div className="profile-name-area">
                                         <div>
@@ -174,12 +196,12 @@ export default function App2(){
                                 </div>
                             </article>
                             <article>
-                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} />パスワードの変更</h3>
+                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} onClick={ChangePassword} />パスワードの変更</h3>
                                 <div>
+                                    <p>Current Password</p>
+                                    <input type="password" value={newPass[0]} name="confirm1" onChange={e=>setNewPass(prev=>[e.target.value,prev[1]])} />
                                     <p>NEW Password</p>
-                                    <input type="password" name="confirm1" />
-                                    <p>NEW Password (Confirm)</p>
-                                    <input type="password" name="confirm1" />
+                                    <input type="password" value={newPass[1]} name="confirm2" onChange={e=>setNewPass(prev=>[prev[0], e.target.value])}/>
                                 </div>
                             </article>
                         </section>
