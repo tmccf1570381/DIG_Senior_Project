@@ -8,8 +8,7 @@ import NewModal from "./components/NewModal";
 import { Amplify, Auth } from 'aws-amplify';
 import Loading from "./components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotate, faAnglesLeft, faCamera } from "@fortawesome/free-solid-svg-icons";
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { faCamera, faRotate, faAnglesRight, faImage, faCircleUser, faKey } from "@fortawesome/free-solid-svg-icons";
 // const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 // UseContext用型定義
@@ -45,8 +44,9 @@ export default function App2(){
     const [src, setSrc] = useState("");
     const [userInfo, setUserInfo] = useState({"user-id": 0, "first-name": "","last-name": "","mail": "","16id": 0,"role": ""});
     const [newPass, setNewPass] = useState(["",""]);
-    const [upload, setUpload] = useState()
-    
+    const [upload, setUpload] = useState();
+    const [preview, setPreview] = useState<string | null | undefined>(undefined);
+
     // ナレッジソート関数
     const sortFunc = (arr:any) => {
         let key = new RegExp(rule.keyword.toLocaleLowerCase());
@@ -63,6 +63,15 @@ export default function App2(){
         setUserInfo(prev => ({...prev, [e.target.name]:e.target.value}))
     }
 
+    const prevfile = async (e:any) => {
+        const reader = new FileReader();
+        setUpload(e.target.files[0]);
+        await reader.readAsDataURL(e.target.files[0])
+        reader.onload =  (E:any) => {
+            setPreview(E.target.result);
+        }
+    }
+
     const UpdataUserInfo = async () => {
         setLoad(true);
         try{
@@ -77,33 +86,36 @@ export default function App2(){
 
     const ChangePassword = async () => {
         setLoad(true);
+        const key = new RegExp("[A-Z]");
         const user = await Auth.currentAuthenticatedUser().then(e=>e).catch(err=>err);
         console.log(user);
-        try{
-            await Auth.changePassword(user, newPass[0], newPass[1]);
-            alert(`パスワードが${newPass[1]}に変更されました`)
-            setNewPass(["",""]);
-        }catch(error){
-            alert(error)
-        }
+        if(newPass[1].length < 6){
+            alert("パスワードは６文字以上にしてください")
+          }else if(!key.test(newPass[1])){
+            alert("パスワードには大文字を１文字以上設定してください")
+          }else{
+            try{
+                await Auth.changePassword(user, newPass[0], newPass[1]);
+                alert(`パスワードが${newPass[1]}に変更されました`)
+                setNewPass(["",""]);
+            }catch(error){
+                alert(error)
+            }
+          }
+
         setLoad(false);
     }
 
     const uploadPict = async () => {
-        const s3 = new S3Client({
-            region: 'us-east-1',
-            credentials: {
-                accessKeyId: process.env.S3_KEY as string,
-                secretAccessKey:process.env.S3_SKEY as string
-            }
-      });
-      s3.send(
-        new PutObjectCommand({
-             Bucket: 'dig-zamas-prof',
-             Key: '10046.png',
-             Body: upload,
-             ContentType: 'image/png',
-        })).catch(e=>e);
+        const file:any = upload
+        const readers = new FileReader()
+        readers.readAsDataURL(file)
+        readers.onload = async () => {
+            const data = await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/s3", {method: "POST", mode: 'cors', headers: {'Content-Type': 'image/png'},
+            body: JSON.stringify({file:readers.result,user:user})}).then(e=>e.json());
+            console.log(data);
+            data.status === 1 && alert("プロフィール画像を更新しました。ページを再読み込みしてください。")
+        };
     };
 
     //データ取得
@@ -130,6 +142,7 @@ export default function App2(){
 
     // ユーザー認証情報確認
     useEffect(()=>{
+        setLoad(true);
         (async()=>{
             // await fetch(fetchURL+"/params").then((e) => e.json())
             await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/params").then((e) => e.json())
@@ -150,6 +163,7 @@ export default function App2(){
                 setUser(0);
             };
         })();
+        setLoad(false);
     },[]);
 
     return(
@@ -173,59 +187,95 @@ export default function App2(){
                     }
                     {cognito === 2 &&
                     <section className="new-profile-area">
-                        <section className="profile-left">
-                            <figure>
-                            {src !== "" 
-                                ? <img src={`data:image/png;base64,${src}`} alt="profile"/>
-                                : <img src="./systemImages/else.png" alt="profile" />}
-                                <input type="file" id="files" accept="image/png" style={{display:"none"}} onChange={(e:any)=> setUpload(e.target.files[0])}/>
-                                <label className="profile-photo-icon" htmlFor="files"><FontAwesomeIcon icon={faCamera} /></label>
-                            </figure>
-                            <button onClick={uploadPict}>test</button>
-                        </section>
-                        <section className="profile-right">
-                            <article>
-                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} onClick={UpdataUserInfo} />基本情報の更新</h3>
-                                <div>
-                                    <div className="profile-name-area">
+                        <div>
+                            <h2 style={{fontSize:"3vmin",margin:"0",marginBottom:"2vh"}}>ユーザー情報の変更</h2>
+                            <section className="profile-row">
+                                <div className="profile-row-head">
+                                    <FontAwesomeIcon className="profile-update" style={{color:"white"}} icon={faImage} />
+                                </div>
+                                <figure className="profile-photo-before">
+                                {src !== "" 
+                                    ? <img src={`data:image/png;base64,${src}`} alt="profile"/>
+                                    : <img src="./systemImages/else.png" alt="profile" />}
+                                    <input type="file" id="files" accept="image/png" style={{display:"none"}} onChange={prevfile}/>
+                                    <label className="profile-photo-icon" htmlFor="files"><FontAwesomeIcon icon={faCamera} /></label>
+                                </figure>
+                                <FontAwesomeIcon icon={faAnglesRight} style={{width:"15%", fontSize:"5vmin"}} />
+                                <figure className="profile-photo-after">
+                                    {preview
+                                        ? <img src={preview} alt="profile"/>
+                                        : <img src="./systemImages/else.png" alt="profile" />
+                                    }
+                                </figure>
+                                <div style={{width:"10%"}}></div>
+                                <div className="profile-photo-button">
+                                    <button className={upload !== undefined ? "" : "hidden-butto"} onClick={uploadPict}><FontAwesomeIcon className="profile-update" icon={faRotate}/></button>
+                                </div>
+                            </section>
+                            <section className="profile-row">
+                                <div className="profile-row-head">
+                                    <FontAwesomeIcon className="profile-update" style={{color:"white"}} icon={faCircleUser} />
+                                </div>
+                                <div className="profile-password-area">
+                                    <div>
                                         <div>
-                                            <p>first name</p>
-                                            <input type="text" name="first-name" value={userInfo["first-name"]} onChange={handler} />
+                                            <h3>First Name</h3>
+                                            <input type="text" name="first-name" value={userInfo["first-name"]} onChange={handler}/>
                                         </div>
                                         <div>
-                                            <p>last name</p>
+                                            <h3>Last Name</h3>
                                             <input type="text" name="last-name" value={userInfo["last-name"]} onChange={handler}/>
                                         </div>
                                     </div>
-                                    <p>Mail</p>
-                                    <input type="text" name="mail" value={userInfo.mail} onChange={handler}/>
-                                    <p>Personality</p>
-                                    <div className="personality-area">
-                                        {userInfo["16id"]
-                                        ? <img id={"#"+String(userInfo["16id"])} src={`./systemImages/${userInfo["16id"]}.png`} alt="persona" />
-                                        : <img src="./systemImages/else.png" alt="profile" />}
-                                        <input type="checkbox" id="check_input" defaultChecked style={{display:"none"}}/>
-                                        <label id="check_btn" htmlFor="check_input">
-                                            <FontAwesomeIcon style={{padding:"0.5vw", margin:"0 0.5vw",borderRadius:"5px",backgroundColor:"gray",color:"white"}} icon={faAnglesLeft} />
-                                        </label>
-                                        {[...Array(16)].map((e,ind)=>ind+1).map(e => {
-                                                return <img key={"#"+String(e)} id={String(e)} src={`./systemImages/${String(e)}.png`} alt="persona" 
-                                                onClick={(e:any) => setUserInfo(prev=>({...prev,"16id":Number(e.target.id)}))} className={userInfo["16id"] === Number(e) ? "persona-icon icon-green" :"persona-icon"} />
-                                        })}
+                                    <div style={{width:"100%"}}>
+                                        <div style={{width:"100%"}}>
+                                            <h3>Mail</h3>
+                                            <input type="text" name="mail" style={{width:"84%",paddingLeft:"2%"}} value={userInfo.mail} onChange={handler}/>
+                                        </div>
                                     </div>
+                                    <h3>Personality</h3>
+                                    <select name="16id" id="doctype" value={userInfo["16id"]}  onChange={(e)=>{setUserInfo(prev => ({...prev, [e.target.name]:Number(e.target.value)}))}} >
+                                        <option value="0">-- choose one --</option>
+                                        <option value="1">建築家</option>
+                                        <option value="2">論理学者</option>
+                                        <option value="3">指揮官</option>
+                                        <option value="4">討論者</option>
+                                        <option value="5">提唱者</option>
+                                        <option value="6">仲介者</option>
+                                        <option value="7">主人公</option>
+                                        <option value="8">運動家</option>
+                                        <option value="9">管理者</option>
+                                        <option value="10">擁護者</option>
+                                        <option value="11">幹部</option>
+                                        <option value="12">領事</option>
+                                        <option value="13">巨匠</option>
+                                        <option value="14">冒険家</option>
+                                        <option value="15">起業家</option>
+                                        <option value="16">エンターテイナー</option>
+                                    </select>
+                                    {(userInfo["16id"]!== undefined && userInfo["16id"]!== 0)
+                                    ? <img src={`./systemImages/${userInfo["16id"]}.png`} className="personal-icon" alt="profile" />
+                                    : <img src="./systemImages/else.png" className="personal-icon" alt="profile" />}
                                 </div>
-                            </article>
-                            <article>
-                                <h3><FontAwesomeIcon className="profile-update" icon={faRotate} onClick={ChangePassword} />パスワードの変更</h3>
-                                <div>
-                                    <p>Current Password</p>
+                                <div className="profile-photo-button">
+                                    <button onClick={UpdataUserInfo}><FontAwesomeIcon className="profile-update" icon={faRotate} /></button>
+                                </div>
+                            </section>
+                            <section className="profile-row">
+                                <div className="profile-row-head">
+                                    <FontAwesomeIcon className="profile-update" style={{color:"white"}} icon={faKey} />
+                                </div>
+                                <div className="profile-password-area">
+                                    <h3>Current Password</h3>
                                     <input type="password" value={newPass[0]} name="confirm1" onChange={e=>setNewPass(prev=>[e.target.value,prev[1]])} />
-                                    <p>NEW Password</p>
+                                    <h3>NEW Password✨</h3>
                                     <input type="password" value={newPass[1]} name="confirm2" onChange={e=>setNewPass(prev=>[prev[0], e.target.value])}/>
                                 </div>
-                            </article>
-                        </section>
-
+                                <div className="profile-photo-button">
+                                    <button onClick={ChangePassword}><FontAwesomeIcon className="profile-update" icon={faRotate} /></button>
+                                </div>
+                            </section>
+                        </div>
                     </section>
                     }
                 </main>

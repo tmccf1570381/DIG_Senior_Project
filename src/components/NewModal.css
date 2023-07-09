@@ -5,7 +5,7 @@
     width: 73vw;
     height: 89vh;
     z-index: 1;
-    background-color: rgba(90, 90, 90, 0.06);
+    background-color: rgba(181, 179, 179, 0.06);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,9 +14,10 @@
 .new-modal-article{
     width: 50vw;
     height: 43vh;
-    padding: 1vh 2vw;
+    padding: 3vmin;
     background-color: #FFD3B4;
     border-radius: 10px;
+    box-shadow: 0rem 0rem 0.4rem rgba(128, 128, 128, 0.479);
 }
 
 .new-modal-L{
@@ -27,51 +28,111 @@
     width: 40%;
 }
 
-.new-modal-L>input, .new-modal-R>select{
-    padding: 0 1vw;
-    height: 4vh;
-    border: none;
-    border-radius: 5px;
-    width: 72%;
-}
-
-.new-modal-R>select{
-    width: 82%;
-}
-
 .new-modal-article h4{
-    margin-bottom: 1vh;
+    margin: 0 0 1vh 0;
+    font-size: 2.3vmin;
+}
+
+.new-modal-article input{
+    height: 4.5vh;
+    width: 90%;
+    border-radius: 0.3em;
+    border: none;
+    margin-bottom: 3vh;
+    font-size: 2vmin;
+    padding-left: 1vw;
+    box-shadow: 0.1rem 0.1rem 0.05rem rgba(128, 128, 128, 0.746);
+}
+
+.new-modal-L>input{
+    width: 80%;
+}
+
+.new-modal-article select{
+    height: 4.5vh;
+    width: 80%;
+    border-radius: 0.3em;
+    border: none;
+    margin-bottom: 3vh;
+    font-size: 2vmin;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    appearance: none;
+    box-shadow: 0.1rem 0.1rem 0.05rem rgba(128, 128, 128, 0.746);
 }
 
 .new-modal-cmment-area{
     display:block;
-    height: 20vh;
+    height: 19vh;
     overflow-y: scroll;
+    padding-bottom: 1vh;
 }
 
-.new-modal-cmment-area>input{
-    padding: 0 1vw;
-    margin: 5px;
-    height: 4vh;
-    width: 90%;
-    border: none;
-    border-radius: 5px;
+.new-modal-cmment-area::-webkit-scrollbar{
+    width: 0.5vmin;
+    background-color: white;
+}
+
+.new-modal-cmment-area::-webkit-scrollbar-track {
+    background-color: rgb(202, 202, 202);
+    border-radius: 100px;
+}
+
+.new-modal-cmment-area::-webkit-scrollbar-thumb {
+    background-color: #68b39d;
+    border-radius: 100px;
 }
 
 .new-modal-button-area{
-    margin-top: 2vh;
+    margin-top: 3vh;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .new-modal-button-area>button{
     width: 15vw;
     height: 4vh;
-    margin: 0 3vw;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0.1rem 0.1rem 0.1rem rgba(128, 128, 128, 0.746);
+}
+
+.new-modal-button-area>button:nth-child(1):hover{
+    background-color: #696969;
+    color: white;
+    font-weight: bold;
+}
+
+.new-modal-button-area>button:nth-child(2):hover{
+    background-color: #68b39d;
+    color: white;
+    font-weight: bold;
+}
+
+.addRow{
+    margin-left: 0.3vw;
+    width: 4vw;
+	height: 4vh;
+    position: relative;
+    border: none;
+	background:#68b39d;
+    color: whitesmoke;
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 2vmin;
+    box-shadow: 0.1rem 0.1rem 0.1rem rgba(128, 128, 128, 0.746);
+}
+
+
+
+/* 
+.new-modal-cmment-area{
+    display:block;
+    height: 20vh;
+    overflow-y: scroll;
 }
 
 .addRow{
@@ -83,4 +144,4 @@
     background-color:#E1F4E3;
     font-size: 2vmin;
     cursor: pointer;
-}
+} */
