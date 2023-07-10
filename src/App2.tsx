@@ -107,6 +107,7 @@ export default function App2(){
     }
 
     const uploadPict = async () => {
+        setLoad(true)
         const file:any = upload
         const readers = new FileReader()
         readers.readAsDataURL(file)
@@ -116,6 +117,7 @@ export default function App2(){
             console.log(data);
             data.status === 1 && alert("プロフィール画像を更新しました。ページを再読み込みしてください。")
         };
+        setLoad(false)
     };
 
     //データ取得
