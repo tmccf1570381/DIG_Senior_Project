@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faStar, faPlus, faClockRotateLeft, faRankingStar, faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { NewValContext } from "../App2";
 import Ranking from "./Ranking";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // const fetchURL = process.env.NODE_ENV === "production" ? "https://dig-zamas.com:3456" : "http://localhost:3456";
 
 
 export default function Navvar(){
     const [rule, setRule, , tag, URLS, ,user] = useContext(NewValContext);
-    const [input, setInput] = useState({title:"", tag:"", url:"", doctype:"", comment:"" })
+    const [input, setInput] = useState({title:"", tag:"", url:"", doctype:"", comment:""})
     const [tab, setTab] = useState(2);
+    const [rankArr, setRankArr] = useState([{"user-id": 0, "first-name": '', "last-name": '', zamas: 0, src:""}]);
     const today = new Date(); 
 
     const handler = (e:any) => {
@@ -36,6 +37,13 @@ export default function Navvar(){
                 break;
         }
     }
+
+    useEffect(()=>{
+        (async()=>{
+            const ranks = await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/users").then((e) => e.json())
+            setRankArr(ranks);
+        })()
+    },[])
 
     return(
         <>
@@ -146,10 +154,10 @@ export default function Navvar(){
                             return (
                                 <section className="minor-item">
                                     <h3>🏆 ランキング</h3>
-                                    {[...Array(7)].map((e,ind)=>
-                                        <Ranking key={ind} />
-                                    )
-                                    }
+                                    <div className="minor-item-rank">
+                                        {rankArr.map((e,ind)=>
+                                            <Ranking key={ind} e={e} ind={ind}/>)}
+                                    </div>
                                 </section>
                             )
     

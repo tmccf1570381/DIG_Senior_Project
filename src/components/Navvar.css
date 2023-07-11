@@ -169,42 +169,107 @@
 
 .ranking{
     display: flex;
+    margin: 13vh 0;
+    height: 100%;
+    width: 100%;
+}
+
+.ranking:first-child{
+    margin-top: 2vh;
+}
+
+.ranking-back,.ranking-front{
+    position: absolute;
+    width: 16vw;
+    height: 10vh;
+    transition: all 0.6s;
+    backface-visibility: hidden;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0 1vw;
+    box-sizing: border-box;
+    display: flex;
+    border: #FFD3B4 0.25vw solid;
+}
+
+.ranking-back {
+    transform: rotateY(-180deg);
+}
+
+.ranking:hover .ranking-front{
+    transform: rotateY(-180deg);
+}
+  
+.ranking:hover .ranking-back{
+    transform: rotateY(0deg);
+} 
+
+.ranking-front{
+    display: flex;
     align-items: center;
-    margin: 3vh 0;
+}
+
+.ranking-front h3,.ranking-front h4{
+    margin: 0%;
+    font-size: 2vmin;
+}
+
+.ranking-front h3{
+    margin-right: 2vw;
+    font-size: 2.5vmin;
+    text-decoration: underline;
+}
+
+.star-icon{
+    color: yellow;
+    filter:drop-shadow(0 0 1px #000);
+    margin-right: 0.3vw;
+}
+
+.ranking-front-score{
+    display: flex;
+    align-items: center;
+
+}
+
+.ranking-back{
+    padding: 0.5vw;
+    display: flex;
+    align-items: center;
 }
 
 .ranking-icon{
     width: 8vmin;
     height: 8vmin;
-    z-index: 2;
+    z-index: 1;
 }
 
+.ranking-icon>img{
+    background-color: #D5ECC2;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 0.3vmin solid #D5ECC2;
+    box-sizing: border-box;
+}
+
+.ranking-back h3{
+    margin-left: 1vw;
+    font-size: 2.2vmin;
+}
+
+
+
+
+
+
+/* 
 .ranking-icon>img{
     object-fit: cover;
     border-radius: 50%;
     max-width: 100%;
     background-color: #ffffff;
     border: #FFD3B4 0.25vw solid;
-}
-
-.ranking-back,.ranking-front{
-    position: absolute;
-    width: 15vw;
-    height: 9vh;
-    transition: all 0.6s;
-    backface-visibility: hidden;
-    background-color: white;
-    border-radius: 0.5rem;
-    padding-left: 2.5vw;
-    margin-left: 2.5vw;
-    box-sizing: border-box;
-    display: flex;
-    border: #FFD3B4 0.25vw double;
-}
-
-.ranking-front{
-    flex-flow: column;
-    justify-content:center;
 }
 
 .ranking-front>h3{
@@ -215,15 +280,4 @@
     margin: 0 0 0 0.5vw;
 }
 
-.ranking-back {
-    transform: rotateX(-180deg);
-    align-items: center;
-}
-
-.ranking:hover .ranking-front{
-    transform: rotateX(180deg);
-}
-  
-.ranking:hover .ranking-back{
-    transform: rotateX(0);
-}
+*/
