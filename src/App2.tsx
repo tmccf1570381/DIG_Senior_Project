@@ -144,8 +144,8 @@ export default function App2(){
 
     // ユーザー認証情報確認
     useEffect(()=>{
-        setLoad(true);
         (async()=>{
+            setLoad(true);
             // await fetch(fetchURL+"/params").then((e) => e.json())
             await fetch("https://0x2lz8helk.execute-api.us-east-1.amazonaws.com/dev/params").then((e) => e.json())
             .then(e=>{
@@ -164,14 +164,17 @@ export default function App2(){
                 setCognito(0);
                 setUser(0);
             };
+            setLoad(false);
         })();
-        setLoad(false);
     },[]);
 
     return(
         <NewValContext.Provider value={[rule, setRule, goodList, tag, post.map(e=>e.url), setUser, user, setCognito, setSrc, setUserInfo]}>
             { cognito === 0
-            ?<Login/>
+            ?<>
+                {load && <Loading />}
+                <Login/>
+             </>
             :<>
                 {load && <Loading />}
                 <NewHeader src={src}/>

@@ -28,7 +28,7 @@ export default function NewHeader({src}:{src:string}){
             {load && <Loading />}
             <section className="new-header">
                 <div>
-                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%",cursor:"pointer"}} />
+                    <img src="./systemImages/zamas.png" alt="tittle" style={{maxHeight:"85%",cursor:"pointer"}} onClick={()=>setCognito(1)}/>
                 </div>
                 <SearchBox />
 
