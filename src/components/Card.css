@@ -17,6 +17,7 @@
     color: #cccccc;
     font-size: 180%;
     margin: 0 0.5vw 0 0.5vw;
+    filter:drop-shadow(0 0 1px #000);
 }
 
 .new-icon+span{
